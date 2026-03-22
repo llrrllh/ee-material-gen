@@ -1,0 +1,49 @@
+# 环境变量和敏感信息
+.env
+.env.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# 导出文件
+exports/
+
+# 历史记录
+history/
+
+# 内容缓存
+content_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 日志文件
+*.log
+server.log
+
+# Playwright
+.playwright/
+
+# 临时文件
+*.tmp
+*.bak

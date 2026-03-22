@@ -1,0 +1,20 @@
+# 复旦EE招生素材生成器 - 依赖包
+# Python 3.10+
+
+# Gemini API
+google-generativeai>=0.8.0
+
+# Web 框架
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+
+# PDF 处理
+pymupdf>=1.24.0
+
+# 长图导出
+playwright>=1.40.0
+
+# 其他工具
+python-multipart>=0.0.9
+pydantic>=2.9.0
+pydantic-settings>=2.5.0
