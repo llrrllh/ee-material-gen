@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>企业家战略思维与创新管理课程 · 复旦大学管理学院</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0F2540;
+    --primary-mid: #1A3A60;
+    --primary-light: #1E4575;
+    --accent: #C8A020;
+    --accent-light: #E8C040;
+    --accent-dark: #9A7A10;
+    --bg: #F0EAE0;
+    --bg-warm: #EDE4D5;
+    --bg-white: #FFFFFF;
+    --text-dark: #1A2535;
+    --text-mid: #4A5568;
+    --text-light: #8A8E98;
+    --font-serif: 'Noto Serif SC', serif;
+    --font-sans: 'Noto Sans SC', 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(180deg, #060F1E 0%, #0F2540 45%, #1A3A60 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 28px 20px 0;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7A6008 0%, #C8A020 35%, #F0D060 65%, #C8A020 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    font-family: var(--font-sans);
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 27px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .hero-title .dot { color: #E8C040; }
+  .hero-course {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #B8900A 0%, #F0D060 30%, #C8A020 60%, #E8C040 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .hero-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.8px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* SVG Hero */
+  .hero-svg-wrap {
+    width: calc(100% + 40px);
+    margin: 0 -20px;
+    height: 260px;
+    position: relative;
+  }
+  .hero-svg-wrap svg { width: 100%; height: 100%; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 36px 20px; }
+  .section-dark {
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-mid) 100%);
+    color: #fff;
+  }
+  .section-white { background: var(--bg-white); }
+  .section-warm { background: var(--bg-warm); }
+  .section-bg { background: var(--bg); }
+
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section-dark .section-title { color: #fff; }
+  .section-dark .section-label { color: rgba(200,160,32,0.7); }
+
+  /* Section 1 引言 */
+  .intro-wrap {
+    position: relative;
+    padding: 20px 18px;
+    background: linear-gradient(135deg, #F8F3EA, #EDE4D5);
+    border-radius: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .intro-text {
+    font-size: 14.5px;
+    line-height: 1.95;
+    color: var(--text-mid);
+    font-style: italic;
+  }
+  .intro-deco {
+    font-family: Georgia, serif;
+    font-size: 60px;
+    color: var(--accent);
+    opacity: 0.2;
+    position: absolute;
+    bottom: -10px;
+    right: 14px;
+    line-height: 1;
+  }
+
+  /* Section 2 核心价值 */
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .value-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9A7A10, #C8A020, #F0D060);
+  }
+  .value-card-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200,160,32,0.65);
+    margin-bottom: 6px;
+  }
+  .value-card-zh {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .value-card-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* Section 3 四大模块 */
+  .module-card {
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(15,37,64,0.08);
+    border-left: 4px solid var(--accent);
+    position: relative;
+  }
+  .module-card:nth-child(even) {
+    border-left-color: var(--primary);
+  }
+  .module-card:nth-child(even) .module-en { color: var(--primary); }
+  .module-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .module-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .module-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .module-faculty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .faculty-label { font-size: 10px; color: var(--text-light); }
+  .faculty-names {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--font-serif);
+  }
+
+  /* Section 4 学习安排 */
+  .arrange-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .arrange-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 10px;
+    text-align: center;
+  }
+  .arrange-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #B8900A, #F0D060, #C8A020);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .arrange-desc {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+  .arrange-icon { font-size: 24px; margin-bottom: 6px; }
+
+  /* Section 5 目标学员 */
+  .target-card {
+    background: linear-gradient(135deg, #F8F3EA, #EDE4D5);
+    border-radius: 14px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(200,160,32,0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .target-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #C8A020, #F0D060, #C8A020);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    line-height: 1;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .target-content {}
+  .target-zh {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .target-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+
+  /* Section 6 核心价值三列 */
+  .value3-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .value3-card {
+    text-align: center;
+    padding: 20px 10px;
+    background: linear-gradient(135deg, #F8F3EA, #EDE4D5);
+    border-radius: 12px;
+    border: 1px solid rgba(200,160,32,0.12);
+  }
+  .value3-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  .value3-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .value3-desc { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
+  /* Section 7 核心师资 */
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .faculty-card {
+    text-align: center;
+    padding: 16px 8px;
+    background: linear-gradient(135deg, #F8F3EA, #EDE4D5);
+    border-radius: 12px;
+    border: 1px solid rgba(200,160,32,0.12);
+  }
+  .faculty-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 700;
+    border: 2px solid rgba(200,160,32,0.3);
+  }
+  .faculty-avatar span {
+    background: linear-gradient(135deg, #C8A020, #F0D060);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .faculty-name {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 3px;
+  }
+  .faculty-role { font-size: 10px; color: var(--text-light); line-height: 1.4; }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(160deg, #060F1E 0%, var(--primary) 50%, var(--primary-mid) 100%);
+    padding: 44px 20px;
+    text-align: center;
+  }
+  .cta-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200,160,32,0.6);
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .cta-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .cta-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #B8900A 0%, #F0D060 40%, #E8C040 70%, #C8A020 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 18px 0;
+    line-height: 1;
+  }
+  .cta-price span { font-size: 18px; font-weight: 400; }
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #7A6008 0%, #C8A020 25%, #F0D060 50%, #C8A020 75%, #7A6008 100%);
+    background-size: 200% auto;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-bottom: 18px;
+    font-family: var(--font-sans);
+    animation: goldShine 3s linear infinite;
+    box-shadow: 0 4px 24px rgba(200,160,32,0.35);
+    text-decoration: none;
+    text-align: center;
+  }
+  @keyframes goldShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  .cta-phone {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .cta-phone a { color: var(--accent-light); text-decoration: none; font-weight: 600; }
+
+  /* Footer */
+  footer {
+    background: #060F1E;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .footer-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .footer-motto {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: rgba(200,160,32,0.5);
+    letter-spacing: 2px;
+  }
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,160,32,0.35), transparent);
+    margin: 14px auto;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero-title, .hero-course, .hero-en {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  .hero-title { animation-delay: 0.1s; }
+  .hero-course { animation-delay: 0.2s; }
+  .hero-en { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-badge">综合管理 · 战略与思维重构</div>
+  <h1 class="hero-title">洞察二次曲线<span class="dot">·</span>重构价值范式</h1>
+  <div class="hero-course">企业家战略思维与创新管理课程</div>
+  <div class="hero-en">Strategic Innovation &amp; Entrepreneurial Leadership</div>
+
+  <!-- SVG Hero: S形二次曲线 + 战略星座 -->
+  <div class="hero-svg-wrap">
+    <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bgGrad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#060F1E" stop-opacity="0"/>
+          <stop offset="70%" stop-color="#0F2540" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#1A3A60" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#9A7A10"/>
+          <stop offset="40%" stop-color="#F0D060"/>
+          <stop offset="100%" stop-color="#C8A020"/>
+        </linearGradient>
+        <linearGradient id="curveGrad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1A3A60"/>
+          <stop offset="50%" stop-color="#C8A020"/>
+          <stop offset="100%" stop-color="#F0D060"/>
+        </linearGradient>
+        <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#C8A020" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#C8A020" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="glow2">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="goldGlow">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Background -->
+      <rect width="480" height="260" fill="#060F1E"/>
+
+      <!-- Grid lines (faint) -->
+      <line x1="0" y1="52" x2="480" y2="52" stroke="#1A3A60" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="104" x2="480" y2="104" stroke="#1A3A60" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="156" x2="480" y2="156" stroke="#1A3A60" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="208" x2="480" y2="208" stroke="#1A3A60" stroke-width="0.5" opacity="0.4"/>
+      <line x1="80" y1="0" x2="80" y2="260" stroke="#1A3A60" stroke-width="0.5" opacity="0.3"/>
+      <line x1="160" y1="0" x2="160" y2="260" stroke="#1A3A60" stroke-width="0.5" opacity="0.3"/>
+      <line x1="240" y1="0" x2="240" y2="260" stroke="#1A3A60" stroke-width="0.5" opacity="0.3"/>
+      <line x1="320" y1="0" x2="320" y2="260" stroke="#1A3A60" stroke-width="0.5" opacity="0.3"/>
+      <line x1="400" y1="0" x2="400" y2="260" stroke="#1A3A60" stroke-width="0.5" opacity="0.3"/>
+
+      <!-- First S-curve (old paradigm, fading) -->
+      <path d="M 20 200 C 60 200, 80 180, 100 150 C 120 120, 130 80, 160 60 C 185 42, 210 40, 240 40"
+            stroke="#2A5278" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5 3">
+        <animate attributeName="stroke-dashoffset" from="0" to="-32" dur="8s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Second S-curve (new paradigm, glowing gold) -->
+      <path d="M 220 220 C 255 220, 275 195, 295 165 C 315 135, 325 95, 355 68 C 380 46, 405 38, 440 32"
+            stroke="url(#curveGrad)" stroke-width="3" fill="none" filter="url(#goldGlow)">
+        <animate attributeName="stroke-dasharray" from="0 400" to="400 0" dur="4s" fill="freeze" begin="0.5s"/>
+      </path>
+
+      <!-- Curve fill area -->
+      <path d="M 220 220 C 255 220, 275 195, 295 165 C 315 135, 325 95, 355 68 C 380 46, 405 38, 440 32 L 440 260 L 220 260 Z"
+            fill="url(#fillGrad)" opacity="0.6"/>
+
+      <!-- Inflection point indicator -->
+      <line x1="295" y1="165" x2="295" y2="220" stroke="#C8A020" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+      <text x="298" y="218" font-family="Inter" font-size="8" fill="#C8A020" opacity="0.7">转折点</text>
+
+      <!-- Phase labels -->
+      <text x="60" y="185" font-family="Inter" font-size="9" fill="#2A5278" opacity="0.6" font-weight="500">第一曲线</text>
+      <text x="355" y="62" font-family="Inter" font-size="9" fill="#C8A020" opacity="0.9" font-weight="600">第二曲线</text>
+
+      <!-- Star constellation network -->
+      <g filter="url(#glow2)">
+        <!-- Strategic nodes -->
+        <!-- Node A: top-left cluster -->
+        <circle cx="55" cy="45" r="4" fill="#C8A020">
+          <animate attributeName="r" values="3;6;3" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="110" cy="28" r="3.5" fill="#C8A020">
+          <animate attributeName="r" values="2.5;5;2.5" dur="5.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="5.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="85" cy="72" r="3" fill="#4A8AB0">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="6s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Node B: mid cluster -->
+        <circle cx="185" cy="55" r="5" fill="#C8A020">
+          <animate attributeName="r" values="4;8;4" dur="3.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.8;1;0.8" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="165" cy="95" r="3" fill="#4A8AB0">
+          <animate attributeName="opacity" values="0.3;0.7;0.3" dur="7s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Node C: right cluster -->
+        <circle cx="355" cy="68" r="5.5" fill="#C8A020">
+          <animate attributeName="r" values="4;8.5;4" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="440" cy="32" r="4" fill="#C8A020">
+          <animate attributeName="r" values="3;6.5;3" dur="4.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="4.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="420" cy="78" r="3" fill="#4A8AB0">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Constellation connections -->
+        <line x1="55" y1="45" x2="110" y2="28" stroke="url(#goldGrad)" stroke-width="1" opacity="0.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3s" repeatCount="indefinite"/>
+        </line>
+        <line x1="110" y1="28" x2="185" y2="55" stroke="url(#goldGrad)" stroke-width="1" opacity="0.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="4s" repeatCount="indefinite"/>
+        </line>
+        <line x1="185" y1="55" x2="355" y2="68" stroke="url(#goldGrad)" stroke-width="1.2" opacity="0.6" stroke-dasharray="5 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-32" dur="5s" repeatCount="indefinite"/>
+        </line>
+        <line x1="355" y1="68" x2="440" y2="32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.5" stroke-dasharray="4 3">
+          <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3.5s" repeatCount="indefinite"/>
+        </line>
+        <!-- Cross connections -->
+        <line x1="55" y1="45" x2="185" y2="55" stroke="#2A5278" stroke-width="0.6" opacity="0.3"/>
+        <line x1="85" y1="72" x2="165" y2="95" stroke="#2A5278" stroke-width="0.6" opacity="0.25"/>
+        <line x1="165" y1="95" x2="355" y2="68" stroke="#2A5278" stroke-width="0.6" opacity="0.2"/>
+        <line x1="420" y1="78" x2="355" y2="68" stroke="#2A5278" stroke-width="0.6" opacity="0.25"/>
+
+        <!-- Floating particles -->
+        <circle cx="260" cy="50" r="2" fill="#C8A020" opacity="0.5">
+          <animate attributeName="cy" values="50;40;50" dur="6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0.7;0.3" dur="6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="35" r="1.5" fill="#C8A020" opacity="0.4">
+          <animate attributeName="cy" values="35;25;35" dur="8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.2;0.6;0.2" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="400" cy="50" r="2" fill="#4A8AB0" opacity="0.4">
+          <animate attributeName="cy" values="50;42;50" dur="7s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- Node labels -->
+      <text x="55" y="38" font-family="Inter" font-size="7" fill="#E8C040" text-anchor="middle" opacity="0.8" font-weight="600">宏观</text>
+      <text x="185" y="48" font-family="Inter" font-size="7" fill="#E8C040" text-anchor="middle" opacity="0.9" font-weight="600">创新</text>
+      <text x="355" y="60" font-family="Inter" font-size="7" fill="#E8C040" text-anchor="middle" opacity="0.9" font-weight="600">治理</text>
+      <text x="440" y="24" font-family="Inter" font-size="7" fill="#E8C040" text-anchor="middle" opacity="0.8" font-weight="600">传承</text>
+
+      <!-- Bottom overlay -->
+      <rect width="480" height="260" fill="url(#bgGrad2)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ SECTION 1: 引言 ═══ -->
+<section class="section section-warm">
+  <div class="section-label">FOREWORD</div>
+  <h2 class="section-title">跨越周期·重构范式</h2>
+  <div class="intro-wrap">
+    <p class="intro-text">
+      当全球经济步入结构性调整的深水区，商业逻辑的重构已是企业家的必答题。如何让过去的经验服务于今日？如何不令过往成就阻碍跨越周期的脚步？
+    </p>
+    <div class="intro-deco">"</div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: 核心价值 ═══ -->
+<section class="section section-dark">
+  <div class="section-label">CORE VALUES</div>
+  <h2 class="section-title">四维战略跃升体系</h2>
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-card-en">GROWTH</div>
+      <div class="value-card-zh">增长重构</div>
+      <div class="value-card-desc">发现并跨越第二增长曲线</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">DECISION</div>
+      <div class="value-card-zh">决策升级</div>
+      <div class="value-card-desc">复杂环境下的精准战略判断</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">GOVERNANCE</div>
+      <div class="value-card-zh">治理跃迁</div>
+      <div class="value-card-desc">构建现代化公司治理体系</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">LEGACY</div>
+      <div class="value-card-zh">传承布局</div>
+      <div class="value-card-desc">基业长青与家族治理规划</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: 四大模块 ═══ -->
+<section class="section section-bg">
+  <div class="section-label">CURRICULUM</div>
+  <h2 class="section-title" style="color:var(--primary)">四大核心模块</h2>
+
+  <div class="module-card">
+    <div class="module-en">MACRO · 识大势</div>
+    <div class="module-title">模块一：宏观视野与经营底盘</div>
+    <div class="module-sub">全球政经格局 · 产业趋势研判 · 经营底层逻辑</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">张家栋 · 孔爱国</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">INNOVATE · 谋破局</div>
+    <div class="module-title">模块二：数智驱动与价值重构</div>
+    <div class="module-sub">数字化转型 · AI战略 · 商业模式创新</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">凌鸿 · 蒋青云</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">WISDOM · 聚人心</div>
+    <div class="module-title">模块三：组织激活与决策智慧</div>
+    <div class="module-sub">组织变革 · 人才战略 · 领导力修炼</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">李绪红 · 包季鸣</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">LEGACY · 筑基业</div>
+    <div class="module-title">模块四：治理方略与基业传承</div>
+    <div class="module-sub">公司治理 · 股权设计 · 家族传承规划</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">吕长江 · 钱世政</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: 学习安排 ═══ -->
+<section class="section section-dark">
+  <div class="section-label">SCHEDULE</div>
+  <h2 class="section-title">学习安排</h2>
+  <div class="arrange-grid">
+    <div class="arrange-card">
+      <div class="arrange-num">18<span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.5)"> 月</span></div>
+      <div class="arrange-desc">完整<br>学制</div>
+    </div>
+    <div class="arrange-card">
+      <div class="arrange-num">16<span style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.5)"> 次</span></div>
+      <div class="arrange-desc">每次2-3天<br>集中授课</div>
+    </div>
+    <div class="arrange-card">
+      <div class="arrange-icon">🔭</div>
+      <div class="arrange-desc">诊断·私董<br>移动课堂</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: 目标学员 ═══ -->
+<section class="section section-white">
+  <div class="section-label">TARGET AUDIENCE</div>
+  <h2 class="section-title">三类核心学员</h2>
+
+  <div class="target-card">
+    <div class="target-en">FOUNDER</div>
+    <div class="target-content">
+      <div class="target-zh">创始人 / 企业实控人</div>
+      <div class="target-desc">在变革浪潮中寻求二次突破，驾驭不确定性，探索增长新路径</div>
+    </div>
+  </div>
+
+  <div class="target-card">
+    <div class="target-en">G2</div>
+    <div class="target-content">
+      <div class="target-zh">志在基业传承的二代</div>
+      <div class="target-desc">建立独立的战略认知体系，以现代治理视角接棒并超越</div>
+    </div>
+  </div>
+
+  <div class="target-card">
+    <div class="target-en">VP/CEO</div>
+    <div class="target-content">
+      <div class="target-zh">上市公司核心高管</div>
+      <div class="target-desc">突破职业天花板，以创业者视角驾驭大型组织与资本市场</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: 核心价值三列 ═══ -->
+<section class="section section-bg">
+  <div class="section-label">VALUE PROPOSITION</div>
+  <h2 class="section-title" style="color:var(--primary)">三大核心价值</h2>
+  <div class="value3-grid">
+    <div class="value3-card">
+      <div class="value3-icon">🧩</div>
+      <div class="value3-title">模型决策</div>
+      <div class="value3-desc">系统化决策框架，应对复杂商业局面</div>
+    </div>
+    <div class="value3-card">
+      <div class="value3-icon">⚙️</div>
+      <div class="value3-title">生产重组</div>
+      <div class="value3-desc">组织与资源的深度重构与优化</div>
+    </div>
+    <div class="value3-card">
+      <div class="value3-icon">🏛️</div>
+      <div class="value3-title">长效治理</div>
+      <div class="value3-desc">构建穿越周期的治理与传承体系</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 7: 核心师资 ═══ -->
+<section class="section section-white">
+  <div class="section-label">FACULTY</div>
+  <h2 class="section-title">核心师资阵容</h2>
+  <div class="faculty-grid">
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>包</span></div>
+      <div class="faculty-name">包季鸣</div>
+      <div class="faculty-role">组织与领导力</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>孔</span></div>
+      <div class="faculty-name">孔爱国</div>
+      <div class="faculty-role">宏观经济</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>蒋</span></div>
+      <div class="faculty-name">蒋青云</div>
+      <div class="faculty-role">数字营销</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>吕</span></div>
+      <div class="faculty-name">吕长江</div>
+      <div class="faculty-role">公司治理</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>芮</span></div>
+      <div class="faculty-name">芮明杰</div>
+      <div class="faculty-role">战略管理</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar"><span>孙</span></div>
+      <div class="faculty-name">孙立坚</div>
+      <div class="faculty-role">金融经济</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 8: CTA ═══ -->
+<section class="cta-section">
+  <div class="cta-label">ENROLLMENT NOW OPEN</div>
+  <h2 class="cta-title">企业家战略思维<br>与创新管理课程</h2>
+  <div style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:6px;">学费总额</div>
+  <div class="cta-price"><span>RMB </span>218,000</div>
+  <a href="tel:02125011512" class="cta-btn">立即咨询报名</a>
+  <div class="cta-phone">
+    招生热线：<a href="tel:02125011512">021-25011512</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">复旦大学管理学院</div>
+  <div class="footer-sub">高层管理教育（EE） · Executive Education</div>
+  <div class="footer-divider"></div>
+  <div class="footer-motto">博学而笃志 · 切问而近思</div>
+</footer>
+
+</body>
+</html>

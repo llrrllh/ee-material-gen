@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>全球供应链管理课程 | 复旦管院</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark:   #0E3D25;
+    --green-mid:    #1A5C3A;
+    --green-light:  #236B46;
+    --gold:         #B8851F;
+    --gold-bright:  #D4A030;
+    --gold-tag:     #E8C050;
+    --gold-shine:   #F5D878;
+    --bg:           #F0EAE0;
+    --white:        #FFFFFF;
+    --card-bg:      #FFFFFF;
+    --text:         #1A1A1A;
+    --text-mid:     #444444;
+    --text-light:   #777777;
+    --border:       rgba(27,92,58,0.15);
+    --metal-gold:   linear-gradient(135deg, #f5d878 0%, #c8921a 35%, #e8c050 55%, #a06810 80%, #f0cc60 100%);
+    --metal-green:  linear-gradient(135deg, #3da068 0%, #1a5c3a 40%, #2d8055 60%, #0e3d25 100%);
+  }
+
+  html { background: var(--bg); }
+  body {
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(170deg, #0a2e1a 0%, #0e3d25 30%, #1a5c3a 65%, #236b46 100%);
+    padding: 32px 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 金属光泽扫光层 */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg,
+      transparent 0%,
+      rgba(232,192,80,0.06) 30%,
+      rgba(245,216,120,0.12) 45%,
+      rgba(232,192,80,0.06) 60%,
+      transparent 100%);
+    pointer-events: none;
+  }
+  /* 右上角装饰圆 */
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 50px solid rgba(232,192,80,0.07);
+    pointer-events: none;
+  }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(232,192,80,0.2);
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero-logo::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    background: var(--metal-gold);
+    border-radius: 2px;
+  }
+  .hero-program-id {
+    font-size: 10px;
+    color: rgba(232,192,80,0.5);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 1px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+  .hero-school {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+  }
+  .hero-course-name {
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--metal-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-family: 'Noto Serif SC', serif;
+  }
+  .hero-title {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 14px;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .hero-title .en-sub {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 2px;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--metal-gold);
+    color: #1a2a10;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 8px 20px;
+    border-radius: 24px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(200,146,26,0.4), 0 1px 0 rgba(255,255,255,0.3) inset;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-map {
+    margin: 0 -20px -1px;
+    height: 260px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 28px 16px;
+  }
+  .section.dark {
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 32px 16px;
+  }
+  .section-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 4px;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 1.5px;
+  }
+  .section-title.white { color: var(--white); letter-spacing: 2px; }
+  .section-title-line {
+    width: 32px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin: 6px auto 20px;
+  }
+  .section-title-line.light { background: var(--gold-tag); }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .intro-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .intro-text {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .intro-text strong { color: var(--green-dark); font-weight: 700; }
+
+  /* ── VALUES ── */
+  .value-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .value-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .value-tag {
+    display: inline-block;
+    background: var(--gold-tag);
+    color: #1a3a20;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+  .value-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    padding-left: 4px;
+  }
+
+  /* ── MODULES ── */
+  .module-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .module-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f5ef 100%);
+    border-radius: 8px;
+    border-left: 4px solid var(--green-dark);
+    padding: 14px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 0 rgba(255,255,255,0.8) inset;
+  }
+  .module-card.gold-border { border-left-color: var(--gold-bright); }
+  .module-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .module-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-dark);
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+  }
+  .module-card.gold-border .module-name { color: var(--gold); }
+  .module-teachers {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .module-teachers strong { color: var(--text-mid); font-weight: 600; }
+
+  /* ── LEARNING FORMS ── */
+  .learning-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .learning-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+  .learning-num {
+    width: 28px; height: 28px;
+    background: var(--green-dark);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-family: 'Inter', sans-serif;
+  }
+  .learning-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 5px;
+  }
+  .learning-desc {
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .learning-card.wide {
+    grid-column: span 2;
+  }
+
+  /* ── FACULTY ── */
+  .faculty-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .faculty-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+  .faculty-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 3px;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 1px;
+  }
+  .faculty-name .en {
+    font-size: 11px;
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+  .faculty-pos {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .faculty-research {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .faculty-note {
+    background: var(--white);
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    padding: 13px 16px;
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+
+  /* ── PROFILE ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+  .stat-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--green-dark);
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -1px;
+  }
+  .stat-num.gold { color: var(--gold); }
+  .stat-unit { font-size: 20px; }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 5px;
+  }
+
+  .bar-box {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+  }
+  .bar-box-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .bar-item { margin-bottom: 10px; }
+  .bar-item:last-child { margin-bottom: 0; }
+  .bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-mid);
+    margin-bottom: 4px;
+  }
+  .bar-track {
+    height: 5px;
+    background: #ece8e0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--green-dark);
+    border-radius: 3px;
+  }
+  .bar-fill.gold { background: var(--gold); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonial-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .testimonial-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  }
+  .t-quote {
+    font-size: 36px;
+    color: var(--green-dark);
+    line-height: 0.8;
+    opacity: 0.15;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .t-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .t-author {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .t-org {
+    font-size: 11.5px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 32px 16px 16px;
+    text-align: center;
+  }
+  .cta-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-tag);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .cta-duration {
+    font-size: 26px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 2px;
+  }
+  .cta-price {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold-bright);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 4px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .cta-price-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+  .cta-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 24px;
+  }
+  .cta-detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+  }
+  .cta-detail strong { color: rgba(255,255,255,0.9); }
+  .cta-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #f5d878 0%, #c8921a 35%, #e8c050 55%, #a06810 80%, #f0cc60 100%);
+    color: #1a2a10;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px;
+    border: none;
+    border-radius: 28px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 20px rgba(200,146,26,0.5), 0 1px 0 rgba(255,255,180,0.4) inset;
+    text-shadow: 0 1px 0 rgba(255,255,200,0.3);
+  }
+  .cta-phone {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .cta-phone a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .cta-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+  .step {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Inter', sans-serif;
+  }
+  .step-arrow { color: var(--gold-tag); font-size: 10px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--green-dark);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .footer-name {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .footer-motto {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 8px;
+    background: var(--bg);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-logo">复旦管院 · 高层管理教育（EE）</div>
+    <div class="hero-program-id">F241177</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-school">Fudan University School of Management</div>
+    <div class="hero-course-name">全球供应链管理课程</div>
+    <h1 class="hero-title">链接全球<br>韧性制胜
+      <span class="en-sub">Global Supply Chain Management Program</span>
+    </h1>
+    <div class="hero-badge">供应链管理高端人才研修班</div>
+  </div>
+
+  <!-- 全球供应链地图 SVG -->
+  <div class="hero-map">
+    <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:100%;">
+      <defs>
+        <!-- 节点光晕：金 -->
+        <radialGradient id="ng1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5d060" stop-opacity="1"/>
+          <stop offset="40%" stop-color="#e8b840" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#c88020" stop-opacity="0"/>
+        </radialGradient>
+        <!-- 节点光晕：青绿 -->
+        <radialGradient id="ng2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#80f0c0" stop-opacity="0.9"/>
+          <stop offset="40%" stop-color="#40c890" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#20a060" stop-opacity="0"/>
+        </radialGradient>
+        <!-- 航线渐变：金 -->
+        <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f5d060" stop-opacity="0"/>
+          <stop offset="30%" stop-color="#f5d060" stop-opacity="0.8"/>
+          <stop offset="70%" stop-color="#e8b840" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#e8b840" stop-opacity="0"/>
+        </linearGradient>
+        <!-- 航线渐变：青绿 -->
+        <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#60e8b0" stop-opacity="0"/>
+          <stop offset="30%" stop-color="#60e8b0" stop-opacity="0.7"/>
+          <stop offset="70%" stop-color="#40c890" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#40c890" stop-opacity="0"/>
+        </linearGradient>
+        <!-- 大陆金属光泽填充 -->
+        <linearGradient id="landGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.13)"/>
+          <stop offset="50%" stop-color="rgba(232,192,80,0.06)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+        </linearGradient>
+        <!-- 底部遮罩 -->
+        <linearGradient id="btmFade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(14,61,37,0)"/>
+          <stop offset="100%" stop-color="rgba(10,46,26,1)"/>
+        </linearGradient>
+        <!-- 节点金属渐变 -->
+        <radialGradient id="nodeMetal" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f8e080"/>
+          <stop offset="40%" stop-color="#d4a030"/>
+          <stop offset="100%" stop-color="#8a5010"/>
+        </radialGradient>
+        <radialGradient id="nodeMetal2" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#b0f8d8"/>
+          <stop offset="40%" stop-color="#40c890"/>
+          <stop offset="100%" stop-color="#107040"/>
+        </radialGradient>
+      </defs>
+
+      <!-- 经纬格线 -->
+      <g stroke="rgba(255,255,255,0.07)" stroke-width="0.5" fill="none">
+        <line x1="0" y1="50" x2="360" y2="50"/>
+        <line x1="0" y1="100" x2="360" y2="100"/>
+        <line x1="0" y1="150" x2="360" y2="150"/>
+        <line x1="0" y1="200" x2="360" y2="200"/>
+        <line x1="40" y1="0" x2="40" y2="260"/>
+        <line x1="80" y1="0" x2="80" y2="260"/>
+        <line x1="120" y1="0" x2="120" y2="260"/>
+        <line x1="160" y1="0" x2="160" y2="260"/>
+        <line x1="200" y1="0" x2="200" y2="260"/>
+        <line x1="240" y1="0" x2="240" y2="260"/>
+        <line x1="280" y1="0" x2="280" y2="260"/>
+        <line x1="320" y1="0" x2="320" y2="260"/>
+      </g>
+      <!-- 赤道强调线 -->
+      <line x1="0" y1="130" x2="360" y2="130" stroke="rgba(232,192,80,0.12)" stroke-width="1"/>
+
+      <!-- 大陆色块（更丰富的形状） -->
+      <g fill="url(#landGrad)" stroke="rgba(232,192,80,0.18)" stroke-width="0.8">
+        <!-- 北美 -->
+        <path d="M15,32 L25,28 L48,26 L62,28 L72,36 L78,50 L76,68 L68,82 L58,90 L46,88 L32,80 L22,70 L14,55 L12,42 Z"/>
+        <!-- 中美/加勒比 -->
+        <path d="M68,90 L78,88 L84,96 L80,105 L72,104 L66,98 Z"/>
+        <!-- 南美 -->
+        <path d="M52,110 L72,106 L82,112 L88,128 L86,150 L78,165 L66,170 L55,162 L46,145 L44,128 L48,115 Z"/>
+        <!-- 欧洲（带斯堪半岛） -->
+        <path d="M130,20 L152,18 L162,16 L175,22 L180,30 L178,42 L168,52 L155,56 L142,52 L132,44 L126,34 L127,24 Z"/>
+        <!-- 英国 -->
+        <path d="M122,26 L130,24 L132,30 L128,38 L122,36 Z"/>
+        <!-- 非洲 -->
+        <path d="M142,58 L168,55 L182,62 L192,75 L192,100 L185,125 L172,140 L158,142 L144,132 L136,112 L134,88 L136,70 Z"/>
+        <!-- 亚洲（主体） -->
+        <path d="M175,18 L220,14 L260,12 L295,18 L318,30 L326,45 L318,62 L300,72 L275,80 L248,84 L220,80 L200,70 L185,58 L176,44 L174,30 Z"/>
+        <!-- 中东/阿拉伯 -->
+        <path d="M192,60 L212,58 L225,65 L228,80 L218,88 L205,86 L194,78 Z"/>
+        <!-- 印度 -->
+        <path d="M215,78 L230,75 L240,85 L238,105 L228,112 L216,105 L210,92 Z"/>
+        <!-- 东南亚 -->
+        <path d="M255,82 L280,78 L295,88 L295,102 L280,108 L262,102 L254,92 Z"/>
+        <!-- 日本 -->
+        <path d="M302,40 L315,36 L322,44 L318,55 L308,58 L300,50 Z"/>
+        <!-- 大洋洲 -->
+        <path d="M282,130 L318,126 L330,136 L326,155 L310,162 L290,156 L278,144 Z"/>
+      </g>
+
+      <!-- ── 主要航运路线（弧线+动画） ── -->
+
+      <!-- 1. 上海 → 鹿特丹（欧亚主干，金色，粗） -->
+      <path d="M290,62 Q260,28 170,36" fill="none" stroke="url(#lg1)" stroke-width="1.8" stroke-dasharray="6,4">
+        <animate attributeName="stroke-dashoffset" from="0" to="-40" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <!-- 上海 → 鹿特丹 辅助线（更亮） -->
+      <path d="M290,62 Q260,28 170,36" fill="none" stroke="rgba(245,208,96,0.25)" stroke-width="3"/>
+
+      <!-- 2. 上海 → 洛杉矶（跨太平洋，青绿） -->
+      <path d="M290,62 Q240,18 75,72" fill="none" stroke="url(#lg2)" stroke-width="1.6" stroke-dasharray="5,4">
+        <animate attributeName="stroke-dashoffset" from="0" to="-36" dur="3.6s" repeatCount="indefinite"/>
+      </path>
+      <path d="M290,62 Q240,18 75,72" fill="none" stroke="rgba(96,232,176,0.18)" stroke-width="3"/>
+
+      <!-- 3. 鹿特丹 → 纽约（大西洋，金色） -->
+      <path d="M170,36 Q130,22 90,58" fill="none" stroke="url(#lg1)" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.85">
+        <animate attributeName="stroke-dashoffset" from="0" to="-32" dur="3.2s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 4. 新加坡 → 上海（东南亚） -->
+      <path d="M272,108 Q282,88 290,62" fill="none" stroke="url(#lg2)" stroke-width="1.2" stroke-dasharray="4,3">
+        <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="2.2s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 5. 迪拜 → 新加坡（印度洋，金色） -->
+      <path d="M212,75 Q242,92 272,108" fill="none" stroke="url(#lg1)" stroke-width="1.1" stroke-dasharray="4,4" opacity="0.75">
+        <animate attributeName="stroke-dashoffset" from="0" to="-32" dur="3s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 6. 迪拜 → 鹿特丹（金色） -->
+      <path d="M212,75 Q195,52 170,36" fill="none" stroke="url(#lg1)" stroke-width="1" stroke-dasharray="3,4" opacity="0.7">
+        <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3.4s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 7. 洛杉矶 → 纽约（陆路提示，虚线） -->
+      <path d="M75,72 Q82,64 90,58" fill="none" stroke="rgba(96,232,176,0.4)" stroke-width="0.8" stroke-dasharray="2,3">
+        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 8. 上海 → 东京（短程，金色） -->
+      <path d="M290,62 Q300,52 310,50" fill="none" stroke="rgba(245,208,96,0.55)" stroke-width="1" stroke-dasharray="3,3">
+        <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.8s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- ── 节点系统 ── -->
+
+      <!-- 上海（主节点，金，最大） -->
+      <circle cx="290" cy="62" r="22" fill="url(#ng1)" opacity="0.7"/>
+      <circle cx="290" cy="62" r="10" fill="url(#ng1)" opacity="0.8"/>
+      <circle cx="290" cy="62" r="6.5" fill="url(#nodeMetal)" opacity="1"/>
+      <circle cx="290" cy="62" r="3" fill="#fff8e0" opacity="0.95"/>
+      <!-- 脉冲动画 -->
+      <circle cx="290" cy="62" r="6.5" fill="none" stroke="#f5d060" stroke-width="1.5" opacity="0.9">
+        <animate attributeName="r" from="6.5" to="18" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.8" to="0" dur="2s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 新加坡（金） -->
+      <circle cx="272" cy="108" r="14" fill="url(#ng1)" opacity="0.6"/>
+      <circle cx="272" cy="108" r="5" fill="url(#nodeMetal)" opacity="1"/>
+      <circle cx="272" cy="108" r="2.2" fill="#fff8e0" opacity="0.9"/>
+      <circle cx="272" cy="108" r="5" fill="none" stroke="#f5d060" stroke-width="1" opacity="0.7">
+        <animate attributeName="r" from="5" to="13" dur="2.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.7" to="0" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 鹿特丹（青绿） -->
+      <circle cx="170" cy="36" r="14" fill="url(#ng2)" opacity="0.65"/>
+      <circle cx="170" cy="36" r="5" fill="url(#nodeMetal2)" opacity="1"/>
+      <circle cx="170" cy="36" r="2.2" fill="#e0fff5" opacity="0.9"/>
+      <circle cx="170" cy="36" r="5" fill="none" stroke="#60e8b0" stroke-width="1" opacity="0.7">
+        <animate attributeName="r" from="5" to="13" dur="2.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.7" to="0" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 洛杉矶（青绿） -->
+      <circle cx="75" cy="72" r="12" fill="url(#ng2)" opacity="0.55"/>
+      <circle cx="75" cy="72" r="4.5" fill="url(#nodeMetal2)" opacity="1"/>
+      <circle cx="75" cy="72" r="2" fill="#e0fff5" opacity="0.9"/>
+      <circle cx="75" cy="72" r="4.5" fill="none" stroke="#60e8b0" stroke-width="0.8" opacity="0.6">
+        <animate attributeName="r" from="4.5" to="11" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" from="0.6" to="0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 迪拜（金） -->
+      <circle cx="212" cy="75" r="11" fill="url(#ng1)" opacity="0.55"/>
+      <circle cx="212" cy="75" r="4" fill="url(#nodeMetal)" opacity="1"/>
+      <circle cx="212" cy="75" r="1.8" fill="#fff8e0" opacity="0.85"/>
+
+      <!-- 纽约（青绿，小） -->
+      <circle cx="90" cy="58" r="8" fill="url(#ng2)" opacity="0.5"/>
+      <circle cx="90" cy="58" r="3.5" fill="url(#nodeMetal2)" opacity="0.9"/>
+      <circle cx="90" cy="58" r="1.5" fill="#e0fff5" opacity="0.85"/>
+
+      <!-- 东京（金，小） -->
+      <circle cx="310" cy="50" r="7" fill="url(#ng1)" opacity="0.5"/>
+      <circle cx="310" cy="50" r="3" fill="url(#nodeMetal)" opacity="0.85"/>
+
+      <!-- 孟买（青绿，小） -->
+      <circle cx="228" cy="96" r="6" fill="url(#ng2)" opacity="0.45"/>
+      <circle cx="228" cy="96" r="2.5" fill="url(#nodeMetal2)" opacity="0.8"/>
+
+      <!-- ── 城市标签 ── -->
+      <g font-family="Inter, sans-serif" font-weight="700" text-anchor="middle">
+        <!-- 上海 金色标签 -->
+        <rect x="278" y="72" width="36" height="13" rx="3" fill="rgba(200,144,30,0.7)"/>
+        <text x="296" y="82" font-size="7.5" fill="#ffe080">上海</text>
+        <!-- 新加坡 -->
+        <rect x="258" y="117" width="44" height="13" rx="3" fill="rgba(200,144,30,0.6)"/>
+        <text x="280" y="127" font-size="7.5" fill="#ffe080">新加坡</text>
+        <!-- 鹿特丹 -->
+        <rect x="156" y="25" width="44" height="13" rx="3" fill="rgba(30,160,100,0.6)"/>
+        <text x="178" y="35" font-size="7.5" fill="#b0ffd8">鹿特丹</text>
+        <!-- 洛杉矶 -->
+        <rect x="56" y="80" width="44" height="13" rx="3" fill="rgba(30,160,100,0.6)"/>
+        <text x="78" y="90" font-size="7.5" fill="#b0ffd8">洛杉矶</text>
+        <!-- 迪拜 -->
+        <rect x="197" y="64" width="32" height="13" rx="3" fill="rgba(200,144,30,0.6)"/>
+        <text x="213" y="74" font-size="7.5" fill="#ffe080">迪拜</text>
+      </g>
+
+      <!-- 底部渐变遮罩（无缝过渡到 hero 背景） -->
+      <rect x="0" y="180" width="360" height="80" fill="url(#btmFade)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="divider"></div>
+<section class="section">
+  <div class="intro-card">
+    <div class="intro-label">【学术锚定】</div>
+    <p class="intro-text">
+      企业的竞争已超越单体边界，本课程旨在培养具有<strong>国际化视野</strong>、深谙<strong>本土商业逻辑</strong>的供应链管理领袖，实现从「响应者」向「<strong>价值创造者</strong>」的跨越。
+    </p>
+  </div>
+</section>
+
+<!-- VALUES -->
+<div class="divider"></div>
+<section class="section dark">
+  <h2 class="section-title white">核心价值维度</h2>
+  <div class="section-title-line light"></div>
+  <div class="value-list">
+    <div class="value-item">
+      <span class="value-tag">韧性重塑</span>
+      <p class="value-desc">抵御地缘政治与宏观波动，构建稳健的全球供应链网络。</p>
+    </div>
+    <div class="value-item">
+      <span class="value-tag">敏捷构建</span>
+      <p class="value-desc">利用AI实现量价协调预测，精准应对市场脉动与需求波动。</p>
+    </div>
+    <div class="value-item">
+      <span class="value-tag">数智技术</span>
+      <p class="value-desc">推动供应链数字化集成，驱动运营全场景的智能化升级。</p>
+    </div>
+    <div class="value-item">
+      <span class="value-tag">金融创新</span>
+      <p class="value-desc">优化供应链资金流，挖掘企业核心竞争力的潜在价值。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<div class="divider"></div>
+<section class="section">
+  <h2 class="section-title">八大模块：实战体系</h2>
+  <div class="section-title-line"></div>
+  <div class="module-list">
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-name">模块一：全球局势与供应链韧性重塑</div>
+      </div>
+      <div class="module-teachers">剖析风险，重塑结构。<strong>主讲：宋国友、孙立坚</strong></div>
+    </div>
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-name">模块二：AI赋能与敏捷供应链构建</div>
+      </div>
+      <div class="module-teachers">数智预测，智慧运营。<strong>主讲：郭瑞军、冯天俊</strong></div>
+    </div>
+    <div class="module-card gold-border">
+      <div class="module-header">
+        <div class="module-name">模块三：精益管理与成本优化</div>
+      </div>
+      <div class="module-teachers">价值流分析，端到端优化。<strong>主讲：李旭、宁钟</strong></div>
+    </div>
+    <div class="module-card gold-border">
+      <div class="module-header">
+        <div class="module-name">模块四：供应链金融创新与变革</div>
+      </div>
+      <div class="module-teachers">产融结合，变动创新。<strong>主讲：陈祥锋、施云</strong></div>
+    </div>
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-name">模块五：数字化转型与系统整合</div>
+      </div>
+      <div class="module-teachers">全链路可视化，实时数据驱动。<strong>主讲：凌鸿、胥正川</strong></div>
+    </div>
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-name">模块六：采购战略与供应商管理</div>
+      </div>
+      <div class="module-teachers">全球寻源，合作共赢。<strong>主讲：陈祥锋、李旭</strong></div>
+    </div>
+    <div class="module-card gold-border">
+      <div class="module-header">
+        <div class="module-name">模块七：物流协同与交付管理</div>
+      </div>
+      <div class="module-teachers">降本增效，提升交付竞争力。<strong>主讲：冯天俊</strong></div>
+    </div>
+    <div class="module-card gold-border">
+      <div class="module-header">
+        <div class="module-name">模块八：标杆企业走访 · 移动课堂</div>
+      </div>
+      <div class="module-teachers">深入行业头部企业，实战方法论现场习得。</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING FORMS -->
+<div class="divider"></div>
+<section class="section dark">
+  <h2 class="section-title white">五位一体学习模式</h2>
+  <div class="section-title-line light"></div>
+  <div class="learning-grid">
+    <div class="learning-card">
+      <div class="learning-num">1</div>
+      <div class="learning-name">大师课堂</div>
+      <div class="learning-desc">顶尖教授 + 行业标杆联合授课</div>
+    </div>
+    <div class="learning-card">
+      <div class="learning-num">2</div>
+      <div class="learning-name">专题游学</div>
+      <div class="learning-desc">海内外标杆企业沉浸式考察</div>
+    </div>
+    <div class="learning-card">
+      <div class="learning-num">3</div>
+      <div class="learning-name">案例研讨</div>
+      <div class="learning-desc">真实企业案例深度拆解</div>
+    </div>
+    <div class="learning-card">
+      <div class="learning-num">4</div>
+      <div class="learning-name">企业走访</div>
+      <div class="learning-desc">一线供应链运作实践学习</div>
+    </div>
+    <div class="learning-card wide">
+      <div class="learning-num">5</div>
+      <div class="learning-name">校友生态</div>
+      <div class="learning-desc">接入复旦供应链校友网络，持续获取业界资源与合作机会</div>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<div class="divider"></div>
+<section class="section">
+  <h2 class="section-title">核心师资</h2>
+  <div class="section-title-line"></div>
+  <div class="faculty-list">
+    <div class="faculty-card">
+      <div class="faculty-name">陈祥锋 <span class="en">CHEN Xiangfeng</span></div>
+      <div class="faculty-pos">复旦大学管理学院教授、博士生导师</div>
+      <div class="faculty-research">供应链金融、金融与运营管理交叉、物流与运营管理</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-name">李旭 <span class="en">LI Xu</span></div>
+      <div class="faculty-pos">复旦大学管理学院教授、博士生导师</div>
+      <div class="faculty-research">可持续发展与创新管理、技术经济、供应链管理</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-name">孙立坚 <span class="en">SUN Lijian</span></div>
+      <div class="faculty-pos">复旦大学经济学院教授、金融研究中心主任</div>
+      <div class="faculty-research">比较金融体系、汇率理论、宏观经济与全球视野</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-name">宋国友 <span class="en">SONG Guoyou</span></div>
+      <div class="faculty-pos">美国研究中心教授、博导</div>
+      <div class="faculty-research">中美关系、国际政治经济学、大国博弈与贸易政策</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-name">施云 <span class="en">SHI Yun</span></div>
+      <div class="faculty-pos">麦当劳（中国）首席供应链官</div>
+      <div class="faculty-research">曾任阿里巴巴集团数字供应链中台产品负责人、供应链运营总经理</div>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-name">郭瑞军 <span class="en">GUO Ruijun</span></div>
+      <div class="faculty-pos">博世全球物流服务部亚太区首席数据官</div>
+      <div class="faculty-research">深耕生产制造业供应链15年，主导多家跨国集团供应链数字化转型</div>
+    </div>
+  </div>
+  <div class="faculty-note">
+    ✦ 此外，课程特邀食品、汽车、消费电子、互联网等行业<strong>标杆企业供应链负责人</strong>，分享采购管理、库存优化、物流协同等实战方法论。
+  </div>
+</section>
+
+<!-- PROFILE -->
+<div class="divider"></div>
+<section class="section">
+  <h2 class="section-title">精英学员画像</h2>
+  <div class="section-title-line"></div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">38<span class="stat-unit">岁</span></div>
+      <div class="stat-label">平均骨干年龄</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num gold">85<span class="stat-unit">%</span></div>
+      <div class="stat-label">核心决策层</div>
+    </div>
+  </div>
+  <div class="bar-box">
+    <div class="bar-box-title">行业来源分布</div>
+    <div class="bar-item">
+      <div class="bar-label"><span>国民快消 & 食品饮料</span><span>35%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>先进制造 & 工业科技</span><span>30%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>全球航运 & 综合物流</span><span>20%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" style="width:20%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>医药生物 & 其他</span><span>15%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" style="width:15%"></div></div>
+    </div>
+  </div>
+  <div class="bar-box">
+    <div class="bar-box-title">职能角色分布</div>
+    <div class="bar-item">
+      <div class="bar-label"><span>计划与供应链总监</span><span>35%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>采购总监/负责人</span><span>30%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>物流/交付总经理</span><span>20%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" style="width:20%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-label"><span>运营/生产/IT总监</span><span>15%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" style="width:15%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div class="divider"></div>
+<section class="section">
+  <h2 class="section-title">学员评价</h2>
+  <div class="section-title-line"></div>
+  <div class="testimonial-list">
+    <div class="testimonial-card">
+      <div class="t-quote">"</div>
+      <p class="t-text">这个项目让你从多元视角探索供应链本质，是理论与实践的碰撞——同时还能结识一批优秀的同行企业家。</p>
+      <div class="t-author">张正良</div>
+      <div class="t-org">上海优联总经理</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-quote">"</div>
+      <p class="t-text">教授们呈现的案例让我对经营自己公司有了深刻洞察，与同行的交流也建立了非常有价值的专业人脉。</p>
+      <div class="t-author">黄英明</div>
+      <div class="t-org">上海宜程国际物流董事长</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-quote">"</div>
+      <p class="t-text">思维是生产力的终极驱动力。复旦在供应链人才稀缺的时代推出这门课程，直接命中了行业最核心的痛点。</p>
+      <div class="t-author">郭正清</div>
+      <div class="t-org">上海万烈芬科技CEO</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="divider"></div>
+<section class="cta">
+  <div class="cta-label">学习周期</div>
+  <div class="cta-duration">8个月（每月2天）</div>
+  <div class="cta-price">RMB 118,000</div>
+  <div class="cta-price-note">完成学业颁发复旦大学结业证书</div>
+  <div class="cta-details">
+    <div class="cta-detail">授课地点：<strong>复旦大学管理学院</strong></div>
+    <div class="cta-detail">+ 移动课堂（企业参访 / 游学）</div>
+  </div>
+  <button class="cta-btn">立即预约咨询</button>
+  <div class="cta-phone">拨打咨询热线：<a href="tel:02125011512">021-25011512</a></div>
+  <div class="cta-steps">
+    <span class="step">申请</span>
+    <span class="step-arrow">→</span>
+    <span class="step">审核</span>
+    <span class="step-arrow">→</span>
+    <span class="step">录取</span>
+    <span class="step-arrow">→</span>
+    <span class="step">缴费</span>
+    <span class="step-arrow">→</span>
+    <span class="step">入学</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-name">复旦大学管理学院 高层管理教育（EE）</div>
+  <div class="footer-motto">博学而笃志 · 切问而近思</div>
+</footer>
+
+</body>
+</html>

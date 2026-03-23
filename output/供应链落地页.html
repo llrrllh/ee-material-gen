@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球供应链管理课程 | 复旦大学管理学院</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a3a5c;
+    --navy-dark: #0f2540;
+    --copper: #c87533;
+    --copper-light: #d9893f;
+    --white: #ffffff;
+    --off-white: #f7f5f0;
+    --light-gray: #f0eee9;
+    --mid-gray: #8a8a8a;
+    --text: #1a1a1a;
+    --text-light: #4a4a4a;
+  }
+
+  body {
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid #e0ddd8;
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-bar {
+    width: 4px;
+    height: 36px;
+    background: var(--navy);
+    border-radius: 2px;
+  }
+  .header-text {
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .header-text span {
+    display: block;
+    font-size: 11px;
+    color: var(--mid-gray);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .header-tag {
+    border: 1.5px solid var(--navy);
+    padding: 5px 12px;
+    font-size: 11px;
+    color: var(--copper);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy-dark);
+    padding: 72px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--copper) 0%, var(--navy) 100%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 60px solid rgba(255,255,255,0.03);
+  }
+  .hero-inner {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-series {
+    font-size: 12px;
+    color: var(--copper);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero-en {
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    font-family: 'Inter', sans-serif;
+  }
+  .hero-tagline {
+    font-size: 17px;
+    color: var(--copper-light);
+    font-weight: 500;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hero-meta-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+  }
+  .hero-meta-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .hero-meta-value.price {
+    color: var(--copper-light);
+    font-size: 22px;
+  }
+
+  /* ── SECTION ── */
+  section {
+    padding: 64px 48px;
+  }
+  .section-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 16px;
+  }
+  .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 4px; bottom: 4px;
+    width: 4px;
+    background: var(--navy);
+    border-radius: 2px;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--copper);
+    font-weight: 500;
+    padding-left: 16px;
+    margin-bottom: 32px;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    background: var(--off-white);
+  }
+  .intro-box {
+    background: var(--white);
+    border-left: 4px solid var(--navy);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  .intro-box strong { color: var(--navy); }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1.5px solid #ddd;
+  }
+  .pain-card {
+    padding: 24px 20px;
+    border-right: 1px solid #ddd;
+    position: relative;
+  }
+  .pain-card:last-child { border-right: none; }
+  .pain-num {
+    font-size: 36px;
+    font-weight: 900;
+    color: rgba(26,58,92,0.08);
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .pain-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .pain-q {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .pain-a {
+    font-size: 12px;
+    color: var(--copper);
+    font-weight: 600;
+  }
+
+  /* ── MODULES ── */
+  .modules { background: var(--white); }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid #ddd;
+  }
+  .module-card {
+    padding: 28px 24px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .module-card:nth-child(2n) { border-right: none; }
+  .module-card:nth-child(3), .module-card:nth-child(4) { border-bottom: none; }
+  .module-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .module-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .module-tag {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .module-tag.copper { background: var(--copper); }
+  .module-desc {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .module-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .module-points li {
+    font-size: 12.5px;
+    color: var(--text-light);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .module-points li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: var(--navy);
+    font-size: 8px;
+    top: 4px;
+  }
+  .module-points li strong { color: var(--navy); font-weight: 600; }
+
+  /* ── LEARNING FORM ── */
+  .learning { background: var(--off-white); }
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .learning-card {
+    background: var(--white);
+    border: 1.5px solid #ddd;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .learning-num {
+    width: 32px; height: 32px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-family: 'Inter', sans-serif;
+  }
+  .learning-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .learning-desc {
+    font-size: 11.5px;
+    color: var(--mid-gray);
+    line-height: 1.5;
+  }
+
+  /* ── FACULTY ── */
+  .faculty { background: var(--white); }
+  .faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1.5px solid #ddd;
+    margin-bottom: 20px;
+  }
+  .faculty-card {
+    padding: 20px 20px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .faculty-card:nth-child(3n) { border-right: none; }
+  .faculty-card:nth-last-child(-n+3) { border-bottom: none; }
+  .faculty-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .faculty-name .en {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--copper);
+    font-family: 'Inter', sans-serif;
+    margin-left: 6px;
+  }
+  .faculty-title {
+    font-size: 11.5px;
+    color: var(--mid-gray);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .faculty-research {
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .faculty-note {
+    background: var(--off-white);
+    border-left: 4px solid var(--copper);
+    padding: 14px 18px;
+    font-size: 12.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* ── PROFILE ── */
+  .profile { background: var(--off-white); }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1.5px solid #ddd;
+    margin-bottom: 32px;
+    background: var(--white);
+  }
+  .stat-card {
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-num {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+  }
+  .stat-num .unit { font-size: 20px; font-weight: 600; }
+  .stat-label {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .profile-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .profile-box {
+    background: var(--white);
+    border: 1.5px solid #ddd;
+    padding: 24px;
+  }
+  .profile-box-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .bar-item {
+    margin-bottom: 12px;
+  }
+  .bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 5px;
+  }
+  .bar-track {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--navy);
+    border-radius: 3px;
+  }
+  .bar-fill.copper { background: var(--copper); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: var(--off-white);
+    padding: 24px;
+    position: relative;
+  }
+  .testimonial-quote {
+    font-size: 52px;
+    color: var(--navy);
+    line-height: 0.8;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 12px;
+    opacity: 0.15;
+  }
+  .testimonial-text {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .testimonial-author {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .testimonial-org {
+    font-size: 11px;
+    color: var(--mid-gray);
+    margin-top: 2px;
+  }
+
+  /* ── CTA FOOTER ── */
+  .cta {
+    background: var(--navy-dark);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--copper) 0%, var(--navy) 100%);
+  }
+  .cta-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+  .cta-left {}
+  .cta-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .cta-price {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--copper-light);
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 8px;
+  }
+  .cta-price .currency {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .cta-detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 4px;
+  }
+  .cta-detail strong { color: rgba(255,255,255,0.85); }
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .cta-btn {
+    background: var(--copper);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-family: 'Noto Sans SC', sans-serif;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { background: var(--copper-light); }
+  .cta-contact {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-align: right;
+  }
+  .cta-contact a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
+  .cta-steps {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .step {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+  }
+  .step-arrow {
+    color: var(--copper);
+    font-size: 11px;
+  }
+  .step.active { color: var(--copper-light); font-weight: 600; }
+
+  /* ── CORNER DECO ── */
+  .corner-deco {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border-right: 2px solid var(--copper);
+    border-bottom: 2px solid var(--copper);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px; }
+    section { padding: 48px 24px; }
+    .pain-grid { grid-template-columns: 1fr 1fr; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .learning-grid { grid-template-columns: 1fr 1fr; }
+    .faculty-grid { grid-template-columns: 1fr 1fr; }
+    .profile-cols { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .cta-right { align-items: flex-start; }
+    .hero-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-bar"></div>
+    <div class="header-text">
+      复旦大学管理学院 | 高层管理教育（EE）
+      <span>FUDAN UNIVERSITY SCHOOL OF MANAGEMENT · EXECUTIVE EDUCATION</span>
+    </div>
+  </div>
+  <div class="header-tag">专业管理进阶系列【全球视野·韧性重构】</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-series">GLOBAL SUPPLY CHAIN MANAGEMENT PROGRAM · F241177</div>
+    <h1 class="hero-title">全球供应链管理课程</h1>
+    <p class="hero-en">Innovation and Reconstruction · Global Supply Chain Management Program</p>
+    <p class="hero-tagline">洞察数字经济 · 重塑供应链核心竞争优势</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">学制</span>
+        <span class="hero-meta-value">8 个月</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">课时</span>
+        <span class="hero-meta-value">每月 2 天</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">授课地点</span>
+        <span class="hero-meta-value">复旦大学 + 移动课堂</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">课程费用</span>
+        <span class="hero-meta-value price">RMB 118,000</span>
+      </div>
+    </div>
+  </div>
+  <div class="corner-deco"></div>
+</section>
+
+<!-- INTRO & PAIN POINTS -->
+<section class="intro">
+  <div class="section-inner">
+    <h2 class="section-title">为什么现在需要这门课？</h2>
+    <p class="section-sub">—— 供应链之战，已是企业生死之战</p>
+    <div class="intro-box">
+      在<strong>去中间化的数字商业时代</strong>，商业竞争的本质已从单个企业之间的博弈，演变为<strong>整体供应链之间的较量</strong>。地缘政治冲突、贸易政策重构、AI技术爆发——每一波冲击，都在倒逼供应链管理者做出更快、更准、更具韧性的决策。本课程专为<strong>供应链中高层管理者</strong>设计，聚焦实战能力与系统视野的双重提升。
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <div class="pain-title">韧性缺失</div>
+        <div class="pain-q">地缘冲突与贸易壁垒频发，如何保障供应链稳定运行？</div>
+        <div class="pain-a">→ 重塑全球供应链抗风险能力</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <div class="pain-title">数智落差</div>
+        <div class="pain-q">AI工具层出不穷，如何真正落地赋能供应链敏捷响应？</div>
+        <div class="pain-a">→ 构建AI驱动的敏捷供应链</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <div class="pain-title">资金瓶颈</div>
+        <div class="pain-q">供应链资金周转压力大，如何优化现金流、挖掘潜在价值？</div>
+        <div class="pain-a">→ 供应链金融创新破局</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">04</div>
+        <div class="pain-title">效率内耗</div>
+        <div class="pain-q">采购、生产、物流各自为战，如何实现端到端协同与数字化？</div>
+        <div class="pain-a">→ 精益管理+数智技术全面升级</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules">
+  <div class="section-inner">
+    <h2 class="section-title">课程体系</h2>
+    <p class="section-sub">—— 四大模块，覆盖供应链全维度能力</p>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">模块一：国际局势与供应链韧性重塑</div>
+          <div class="module-tag">GLOBAL · 识大局</div>
+        </div>
+        <p class="module-desc">剖析当下复杂国际形势对供应链的冲击，探讨如何重塑全球供应链、提升抗风险能力与韧性。</p>
+        <ul class="module-points">
+          <li><strong>地缘政治与产业链重构</strong>：大国博弈下的贸易风险与营商环境变化</li>
+          <li><strong>宏观经济解读</strong>：政策信号背后的商业逻辑与机遇判断</li>
+          <li><strong>全球供应链韧性战略</strong>：多元化布局、风险分散与应急预案</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">模块二：人工智能赋能与敏捷供应链构建</div>
+          <div class="module-tag copper">DIGITAL · 谋破局</div>
+        </div>
+        <p class="module-desc">聚焦AI技术在供应链预测、决策、执行环节的应用，实现供应链的敏捷响应与快速迭代。</p>
+        <ul class="module-points">
+          <li><strong>AI驱动的需求预测</strong>：从数据到决策，提升预测准确率</li>
+          <li><strong>智能采购与库存优化</strong>：降低积压风险，提升资产效率</li>
+          <li><strong>数字化工具落地实践</strong>：AI工具选型与企业级部署路径</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">模块三：供应链金融创新与核心竞争力锻造</div>
+          <div class="module-tag">FINANCE · 抓经营</div>
+        </div>
+        <p class="module-desc">探索供应链金融的新模式与新技术，优化资金流，挖掘企业潜在价值，提升市场竞争力。</p>
+        <ul class="module-points">
+          <li><strong>应收账款与动产融资</strong>：盘活流动资产，改善现金流结构</li>
+          <li><strong>供应链金融平台搭建</strong>：从甲方到生态链主的模式跃迁</li>
+          <li><strong>风险管理与合规边界</strong>：金融创新中的红线与机会</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-title">模块四：精益管理与数智技术应用</div>
+          <div class="module-tag copper">LEAN · 优流程</div>
+        </div>
+        <p class="module-desc">引入精益管理理念与数智方法论，从端到端出发消灭浪费，实现全场景数字化与实时可视化。</p>
+        <ul class="module-points">
+          <li><strong>精益生产与流程优化</strong>：识别七大浪费，提升作业效率</li>
+          <li><strong>供应链可视化与协同</strong>：打破部门墙，建立实时数据贯通</li>
+          <li><strong>标杆企业走访</strong>：深入一线，学习头部企业实战方法论</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING FORM -->
+<section class="learning">
+  <div class="section-inner">
+    <h2 class="section-title">五位一体学习模式</h2>
+    <p class="section-sub">—— 理论与实战深度融合</p>
+    <div class="learning-grid">
+      <div class="learning-card">
+        <div class="learning-num">1</div>
+        <div class="learning-title">大师专家课堂</div>
+        <div class="learning-desc">复旦顶尖教授 + 行业标杆企业供应链负责人联合授课</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">2</div>
+        <div class="learning-title">专题考察游学</div>
+        <div class="learning-desc">走出课堂，赴海内外标杆企业进行沉浸式游学考察</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">3</div>
+        <div class="learning-title">案例研讨学习</div>
+        <div class="learning-desc">真实企业案例深度拆解，理论框架落地实战情境</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">4</div>
+        <div class="learning-title">标杆企业走访</div>
+        <div class="learning-desc">深入行业头部企业，学习一线供应链运作实践</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">5</div>
+        <div class="learning-title">校友资源生态</div>
+        <div class="learning-desc">接入复旦供应链校友网络，持续获取业界资源与机会</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section class="faculty">
+  <div class="section-inner">
+    <h2 class="section-title">核心师资</h2>
+    <p class="section-sub">—— 学术深度 × 实战经验</p>
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <div class="faculty-name">陈祥锋 <span class="en">CHEN Xiangfeng</span></div>
+        <div class="faculty-title">复旦大学管理学院教授、博士生导师</div>
+        <div class="faculty-research">供应链金融、金融与运营管理交叉研究、物流与运营管理</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-name">李旭 <span class="en">LI Xu</span></div>
+        <div class="faculty-title">复旦大学管理学院教授、博士生导师</div>
+        <div class="faculty-research">可持续发展与创新管理、技术经济与管理、供应链管理</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-name">孙立坚 <span class="en">SUN Lijian</span></div>
+        <div class="faculty-title">复旦大学经济学院教授、金融研究中心主任</div>
+        <div class="faculty-research">比较金融体系、汇率理论、宏观经济与全球视野</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-name">宋国友 <span class="en">SONG Guoyou</span></div>
+        <div class="faculty-title">美国研究中心教授、博导、副主任</div>
+        <div class="faculty-research">中美关系、国际政治经济学、大国博弈与贸易政策</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-name">冯天俊 <span class="en">FENG Tianjun</span></div>
+        <div class="faculty-title">复旦大学管理学院教授、博士生导师</div>
+        <div class="faculty-research">物流与供应链管理、数据驱动运营、行为运营管理</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-name">施云 <span class="en">SHI Yun</span></div>
+        <div class="faculty-title">麦当劳（中国）首席供应链官</div>
+        <div class="faculty-research">曾任阿里巴巴集团数字供应链中台产品负责人、供应链运营总经理</div>
+      </div>
+    </div>
+    <div class="faculty-note">
+      ✦ 此外，课程特邀食品、汽车、消费电子、互联网等行业<strong>标杆企业供应链负责人</strong>，分享采购管理、库存优化、物流协同等实战方法论，助力学员将理论转化为业务能力。
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT PROFILE -->
+<section class="profile">
+  <div class="section-inner">
+    <h2 class="section-title">学员群体画像</h2>
+    <p class="section-sub">—— 汇聚供应链领域实战指挥官</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">38<span class="unit">岁</span></div>
+        <div class="stat-label">平均骨干年龄</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">40<span class="unit">%</span></div>
+        <div class="stat-label">500强/百亿级企业背景</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">65<span class="unit">%</span></div>
+        <div class="stat-label">总监/VP级及以上</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">行业生态链全覆盖</div>
+      </div>
+    </div>
+    <div class="profile-cols">
+      <div class="profile-box">
+        <div class="profile-box-title">行业来源分布</div>
+        <div class="bar-item">
+          <div class="bar-label"><span>国民快消 & 食品饮料</span><span>35%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>先进制造 & 工业科技</span><span>30%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>全球航运 & 综合物流</span><span>20%</span></div>
+          <div class="bar-track"><div class="bar-fill copper" style="width:20%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>医药生物 & 其他</span><span>15%</span></div>
+          <div class="bar-track"><div class="bar-fill copper" style="width:15%"></div></div>
+        </div>
+      </div>
+      <div class="profile-box">
+        <div class="profile-box-title">职能角色分布</div>
+        <div class="bar-item">
+          <div class="bar-label"><span>计划与供应链总监</span><span>35%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>采购总监/负责人</span><span>30%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>物流/交付总经理</span><span>20%</span></div>
+          <div class="bar-track"><div class="bar-fill copper" style="width:20%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>运营/生产/IT总监</span><span>15%</span></div>
+          <div class="bar-track"><div class="bar-fill copper" style="width:15%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <h2 class="section-title">学员评价</h2>
+    <p class="section-sub">—— 来自供应链一线管理者的真实反馈</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">这个项目让你从多元视角探索供应链本质，是理论与实践的碰撞——同时还能结识一批优秀的同行企业家。</p>
+        <div class="testimonial-author">张正良</div>
+        <div class="testimonial-org">上海优联总经理</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">教授们呈现的案例和商业模型，让我对经营自己公司有了深刻洞察。与同行的交流，也建立了非常有价值的专业人脉。</p>
+        <div class="testimonial-author">黄英明</div>
+        <div class="testimonial-org">上海宜程国际物流董事长</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">思维是生产力的终极驱动力。复旦在供应链人才稀缺的时代推出这门课程，直接命中了行业最核心的痛点。</p>
+        <div class="testimonial-author">郭正清</div>
+        <div class="testimonial-org">上海万烈芬科技CEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<footer class="cta">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="cta-label">PROGRAM FEE · 课程费用</div>
+      <div class="cta-price"><span class="currency">RMB </span>118,000</div>
+      <div class="cta-detail">学制 <strong>8 个月</strong> · 每月集中学习 <strong>2 天（周末）</strong></div>
+      <div class="cta-detail">授课地点：<strong>复旦大学管理学院</strong> + 移动课堂（企业参访/游学）</div>
+      <div class="cta-detail">完成学业颁发 <strong>复旦大学结业证书</strong></div>
+      <div class="cta-steps">
+        <span class="step active">申请</span>
+        <span class="step-arrow">→</span>
+        <span class="step">审核</span>
+        <span class="step-arrow">→</span>
+        <span class="step">录取</span>
+        <span class="step-arrow">→</span>
+        <span class="step">缴费</span>
+        <span class="step-arrow">→</span>
+        <span class="step">入学</span>
+      </div>
+    </div>
+    <div class="cta-right">
+      <button class="cta-btn">立即预约咨询</button>
+      <div class="cta-contact">
+        咨询电话：<a href="tel:02125011512">021-25011512</a><br>
+        <a href="http://www.fdsm.fudan.edu.cn/exeedu/" target="_blank">www.fdsm.fudan.edu.cn/exeedu/</a>
+      </div>
+    </div>
+  </div>
+  <div class="corner-deco"></div>
+</footer>
+
+</body>
+</html>

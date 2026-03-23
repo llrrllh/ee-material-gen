@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>高级经理工商管理核心课程 · 复旦大学管理学院</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1E5FA0;
+    --primary-light: #2E7CC8;
+    --accent: #E07820;
+    --accent-light: #F09030;
+    --accent-dark: #C06010;
+    --bg: #EFF5FC;
+    --bg-white: #FFFFFF;
+    --text-dark: #162840;
+    --text-mid: #3A5068;
+    --text-light: #7A90A8;
+    --font-serif: 'Noto Serif SC', serif;
+    --font-sans: 'Noto Sans SC', 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(180deg, #104070 0%, #1E5FA0 50%, #2E7CC8 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 28px 20px 0;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #C06010 0%, #E07820 35%, #F5A030 65%, #E07820 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    font-family: var(--font-sans);
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: #F5A030; }
+  .hero-course {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #E8B840 0%, #FAD060 30%, #E07820 60%, #F5A830 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .hero-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* SVG Hero Visual */
+  .hero-svg-wrap {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+  }
+  .hero-svg-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 36px 20px; }
+  .section-dark {
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+  }
+  .section-white { background: var(--bg-white); }
+  .section-bg { background: var(--bg); }
+
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section-dark .section-title { color: #fff; }
+
+  /* Section 1 引言 */
+  .intro-text {
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: var(--text-mid);
+    position: relative;
+    padding-left: 16px;
+    border-left: 3px solid var(--accent);
+  }
+  .fudan-seal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #F8F4EE, #EDE5D8);
+    border-radius: 8px;
+    border: 1px solid rgba(224,120,32,0.2);
+  }
+  .seal-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .seal-icon span { color: #fff; font-size: 14px; font-weight: 700; font-family: var(--font-serif); }
+  .seal-text { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+  .seal-text strong { color: var(--primary); font-size: 13px; }
+
+  /* Section 2 核心价值 */
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .value-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #C06010, #E07820, #F5A030);
+  }
+  .value-card-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(224,120,32,0.7);
+    margin-bottom: 6px;
+  }
+  .value-card-zh {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .value-card-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  /* Section 3 四大模块 */
+  .module-card {
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+    border-left: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .module-card:nth-child(even) {
+    border-left-color: var(--primary);
+  }
+  .module-card:nth-child(even) .module-num { background: var(--primary); }
+  .module-card:nth-child(even) .module-tag { color: var(--primary); }
+  .module-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .module-card:nth-child(even) .module-en { color: var(--primary); }
+  .module-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .module-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .module-faculty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .faculty-label {
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
+  .faculty-names {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--font-serif);
+  }
+
+  /* Section 4 学习安排 */
+  .arrange-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .arrange-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 10px;
+    text-align: center;
+  }
+  .arrange-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #E8B840, #F5C840, #E07820);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .arrange-unit {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 6px;
+  }
+  .arrange-desc {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+
+  /* Section 5 学员画像 */
+  .portrait-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    text-align: center;
+    padding: 16px 8px;
+    background: linear-gradient(135deg, #F8F4EE, #EDE5D8);
+    border-radius: 12px;
+    border: 1px solid rgba(224,120,32,0.15);
+  }
+  .stat-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num sup { font-size: 14px; vertical-align: top; margin-top: 4px; display: inline-block; }
+  .stat-label { font-size: 10px; color: var(--text-light); line-height: 1.4; }
+
+  .chart-section { margin-bottom: 20px; }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .bar-label { font-size: 11px; color: var(--text-mid); width: 65px; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 8px; background: #EDE5D8; border-radius: 4px; overflow: hidden; }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  }
+  .bar-fill.accent { background: linear-gradient(90deg, var(--accent-dark), var(--accent)); }
+  .bar-pct { font-size: 11px; font-weight: 600; color: var(--primary); width: 30px; text-align: right; }
+
+  /* Section 6 学员评价 */
+  .review-card {
+    background: linear-gradient(135deg, #F8F4EE, #EDE5D8);
+    border: 1px solid rgba(224,120,32,0.12);
+    border-radius: 14px;
+    padding: 20px 18px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .quote-mark {
+    font-family: Georgia, serif;
+    font-size: 52px;
+    color: var(--accent);
+    line-height: 0.6;
+    position: absolute;
+    top: 16px;
+    left: 14px;
+    opacity: 0.4;
+  }
+  .review-text {
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--text-mid);
+    padding-top: 20px;
+    font-style: italic;
+  }
+  .review-author {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .author-info-name { font-size: 14px; font-weight: 700; color: var(--text-dark); font-family: var(--font-serif); }
+  .author-info-title { font-size: 11px; color: var(--text-light); }
+
+  /* Section 7 CTA */
+  .cta-section {
+    background: linear-gradient(160deg, #1868B8 0%, var(--primary) 50%, var(--primary-light) 100%);
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .cta-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(224,120,32,0.7);
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+  .cta-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .cta-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #E8B840 0%, #FAD060 40%, #F09030 70%, #E07820 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 16px 0;
+    line-height: 1;
+  }
+  .cta-price span { font-size: 18px; font-weight: 400; }
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #B05010 0%, #E07820 25%, #F5A030 50%, #E07820 75%, #B05010 100%);
+    background-size: 200% auto;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-family: var(--font-sans);
+    animation: metalShine 3s linear infinite;
+    box-shadow: 0 4px 20px rgba(224,120,32,0.4);
+    text-decoration: none;
+    text-align: center;
+  }
+  @keyframes metalShine {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  .cta-phone {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .cta-phone a { color: var(--accent-light); text-decoration: none; font-weight: 600; }
+
+  /* Footer */
+  footer {
+    background: #1868B8;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .footer-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .footer-motto {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    color: rgba(224,120,32,0.6);
+    letter-spacing: 2px;
+  }
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(224,120,32,0.4), transparent);
+    margin: 14px auto;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero-title, .hero-course, .hero-en { animation: fadeInUp 0.6s ease-out both; }
+  .hero-title { animation-delay: 0.1s; }
+  .hero-course { animation-delay: 0.2s; }
+  .hero-en { animation-delay: 0.3s; }
+
+  /* SVG animation keyframes */
+  @keyframes flowLight {
+    0% { stroke-dashoffset: 200; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; r: 4; }
+    50% { opacity: 1; r: 7; }
+  }
+  @keyframes nodeGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-badge">综合管理 · 卓越管理实战</div>
+  <h1 class="hero-title">精进管理<span>·</span>突破边界</h1>
+  <div class="hero-course">高级经理工商管理核心课程</div>
+  <div class="hero-en">Advance Beyond Management</div>
+
+  <!-- SVG Hero: 城市天际线 + 管理网络节点 -->
+  <div class="hero-svg-wrap">
+    <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <!-- 背景渐变 -->
+        <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#1A4A80"/>
+          <stop offset="100%" stop-color="#0A2040"/>
+        </radialGradient>
+        <!-- 齿轮金属渐变 -->
+        <linearGradient id="gearMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4A90C8"/>
+          <stop offset="25%" stop-color="#2E6AA0"/>
+          <stop offset="50%" stop-color="#5AA0D8"/>
+          <stop offset="75%" stop-color="#1E5888"/>
+          <stop offset="100%" stop-color="#3A7AB8"/>
+        </linearGradient>
+        <linearGradient id="gearMetal2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3A7AB8"/>
+          <stop offset="30%" stop-color="#2060A0"/>
+          <stop offset="60%" stop-color="#4A88C0"/>
+          <stop offset="100%" stop-color="#1A5090"/>
+        </linearGradient>
+        <linearGradient id="gearMetal3" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#5090C0"/>
+          <stop offset="50%" stop-color="#2870A8"/>
+          <stop offset="100%" stop-color="#4888C0"/>
+        </linearGradient>
+        <!-- 橙金属渐变（高光） -->
+        <linearGradient id="goldMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F5C040"/>
+          <stop offset="30%" stop-color="#D07818"/>
+          <stop offset="60%" stop-color="#F0A828"/>
+          <stop offset="100%" stop-color="#B86010"/>
+        </linearGradient>
+        <!-- 时钟表盘渐变 -->
+        <radialGradient id="clockFace" cx="50%" cy="35%" r="70%">
+          <stop offset="0%" stop-color="#2870B8"/>
+          <stop offset="60%" stop-color="#1A5090"/>
+          <stop offset="100%" stop-color="#0E3060"/>
+        </radialGradient>
+        <!-- 发光滤镜 -->
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="glowOrange" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <!-- 底部遮罩 -->
+        <linearGradient id="btmFade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(14,48,96,0)"/>
+          <stop offset="100%" stop-color="rgba(10,32,64,1)"/>
+        </linearGradient>
+        <!-- 刻度渐变 -->
+        <linearGradient id="tickGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#F5C040"/>
+          <stop offset="100%" stop-color="#E07820"/>
+        </linearGradient>
+      </defs>
+
+      <!-- 背景 -->
+      <rect width="480" height="260" fill="url(#bgGrad)"/>
+
+      <!-- 背景网格 -->
+      <g stroke="rgba(100,160,220,0.06)" stroke-width="0.5">
+        <line x1="0" y1="40" x2="480" y2="40"/>
+        <line x1="0" y1="80" x2="480" y2="80"/>
+        <line x1="0" y1="120" x2="480" y2="120"/>
+        <line x1="0" y1="160" x2="480" y2="160"/>
+        <line x1="0" y1="200" x2="480" y2="200"/>
+        <line x1="60" y1="0" x2="60" y2="260"/>
+        <line x1="120" y1="0" x2="120" y2="260"/>
+        <line x1="180" y1="0" x2="180" y2="260"/>
+        <line x1="240" y1="0" x2="240" y2="260"/>
+        <line x1="300" y1="0" x2="300" y2="260"/>
+        <line x1="360" y1="0" x2="360" y2="260"/>
+        <line x1="420" y1="0" x2="420" y2="260"/>
+      </g>
+
+      <!-- ── 齿轮组 ── -->
+
+      <!-- 辅助函数：齿轮用polygon近似 -->
+      <!-- 大齿轮：中央（cx=240, cy=130, r=72, 12齿） -->
+      <g transform="translate(240,130)">
+        <animateTransform attributeName="transform" type="rotate" from="0 240 130" to="360 240 130" dur="20s" repeatCount="indefinite" additive="replace"/>
+        <!-- 齿（外环+内环交替多边形近似） -->
+        <polygon points="
+          0,-84  8,-76  8,-62  0,-70  -8,-62  -8,-76
+          14,-82  22,-72  18,-60  8,-62
+          -14,-82  -22,-72  -18,-60  -8,-62
+          24,-78  30,-66  24,-56  18,-60
+          -24,-78  -30,-66  -24,-56  -18,-60
+          30,-70  34,-56  26,-48  24,-56
+          -30,-70  -34,-56  -26,-48  -24,-56
+          34,-58  36,-44  28,-38  26,-48
+          -34,-58  -36,-44  -28,-38  -26,-48
+          36,-42  36,-28  28,-28  28,-38
+          -36,-42  -36,-28  -28,-28  -28,-38
+          36,-26  34,-12  26,-14  28,-28
+          -36,-26  -34,-12  -26,-14  -28,-28
+          34,-10  30,4  22,0  26,-14
+          -34,-10  -30,4  -22,0  -26,-14
+          30,6  24,18  16,12  22,0
+          -30,6  -24,18  -16,12  -22,0
+          24,20  16,30  10,22  16,12
+          -24,20  -16,30  -10,22  -16,12
+          14,32  6,40  2,32  10,22
+          -14,32  -6,40  -2,32  -10,22
+          4,42  -4,42  -2,32  2,32
+        " fill="none" stroke="none"/>
+        <!-- 外齿轮简化：用path画齿形 -->
+        <path d="
+          M0,-84 L10,-78 L10,-62 L0,-70 L-10,-62 L-10,-78 Z
+          M18,-82 L26,-72 L20,-58 L10,-62 L10,-78 Z
+          M-18,-82 L-26,-72 L-20,-58 L-10,-62 L-10,-78 Z
+          M32,-74 L38,-60 L28,-50 L20,-58 L26,-72 Z
+          M-32,-74 L-38,-60 L-28,-50 L-20,-58 L-26,-72 Z
+          M42,-62 L44,-46 L32,-40 L28,-50 L38,-60 Z
+          M-42,-62 L-44,-46 L-32,-40 L-28,-50 L-38,-60 Z
+          M46,-44 L46,-28 L34,-26 L32,-40 L44,-46 Z
+          M-46,-44 L-46,-28 L-34,-26 L-32,-40 L-44,-46 Z
+          M44,-24 L42,-8 L30,-8 L34,-26 L46,-28 Z
+          M-44,-24 L-42,-8 L-30,-8 L-34,-26 L-46,-28 Z
+          M40,-6 L34,10 L22,8 L30,-8 L42,-8 Z
+          M-40,-6 L-34,10 L-22,8 L-30,-8 L-42,-8 Z
+          M32,12 L24,26 L14,22 L22,8 L34,10 Z
+          M-32,12 L-24,26 L-14,22 L-22,8 L-34,10 Z
+          M20,28 L10,40 L2,34 L14,22 L24,26 Z
+          M-20,28 L-10,40 L-2,34 L-14,22 L-24,26 Z
+          M8,42 L-8,42 L-2,34 L2,34 Z
+        " fill="url(#gearMetal)" stroke="rgba(80,160,220,0.3)" stroke-width="0.5"/>
+        <!-- 齿轮圆盘 -->
+        <circle r="60" fill="url(#gearMetal)" stroke="rgba(80,160,220,0.4)" stroke-width="1"/>
+        <!-- 内圈装饰 -->
+        <circle r="50" fill="none" stroke="rgba(100,180,240,0.2)" stroke-width="0.8"/>
+        <circle r="45" fill="url(#clockFace)" stroke="rgba(100,180,240,0.3)" stroke-width="1"/>
+        <!-- 刻度 -->
+        <g stroke="url(#tickGold)" stroke-width="1.5">
+          <line x1="0" y1="-42" x2="0" y2="-36"/>
+          <line x1="21" y1="-36" x2="18" y2="-31"/>
+          <line x1="36" y1="-21" x2="31" y2="-18"/>
+          <line x1="42" y1="0" x2="36" y2="0"/>
+          <line x1="36" y1="21" x2="31" y2="18"/>
+          <line x1="21" y1="36" x2="18" y2="31"/>
+          <line x1="0" y1="42" x2="0" y2="36"/>
+          <line x1="-21" y1="36" x2="-18" y2="31"/>
+          <line x1="-36" y1="21" x2="-31" y2="18"/>
+          <line x1="-42" y1="0" x2="-36" y2="0"/>
+          <line x1="-36" y1="-21" x2="-31" y2="-18"/>
+          <line x1="-21" y1="-36" x2="-18" y2="-31"/>
+        </g>
+        <!-- 细刻度 -->
+        <g stroke="rgba(180,220,255,0.3)" stroke-width="0.8">
+          <line x1="11" y1="-41" x2="9.5" y2="-37"/>
+          <line x1="30" y1="-30" x2="26" y2="-27"/>
+          <line x1="41" y1="-11" x2="37" y2="-9.5"/>
+          <line x1="41" y1="11" x2="37" y2="9.5"/>
+          <line x1="30" y1="30" x2="26" y2="27"/>
+          <line x1="11" y1="41" x2="9.5" y2="37"/>
+          <line x1="-11" y1="41" x2="-9.5" y2="37"/>
+          <line x1="-30" y1="30" x2="-26" y2="27"/>
+          <line x1="-41" y1="11" x2="-37" y2="9.5"/>
+          <line x1="-41" y1="-11" x2="-37" y2="-9.5"/>
+          <line x1="-30" y1="-30" x2="-26" y2="-27"/>
+          <line x1="-11" y1="-41" x2="-9.5" y2="-37"/>
+        </g>
+        <!-- 时针 -->
+        <line x1="0" y1="4" x2="-18" y2="-28" stroke="url(#goldMetal)" stroke-width="3" stroke-linecap="round" filter="url(#glowOrange)"/>
+        <!-- 分针 -->
+        <line x1="0" y1="4" x2="10" y2="-36" stroke="rgba(200,230,255,0.9)" stroke-width="2" stroke-linecap="round"/>
+        <!-- 秒针 -->
+        <line x1="0" y1="8" x2="0" y2="-38" stroke="#F5A030" stroke-width="1" stroke-linecap="round" opacity="0.8">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite"/>
+        </line>
+        <!-- 中心轴 -->
+        <circle r="5" fill="url(#goldMetal)" stroke="rgba(255,200,100,0.5)" stroke-width="1" filter="url(#glowOrange)"/>
+        <circle r="2" fill="#fff8e0"/>
+        <!-- 内圈文字装饰 -->
+        <text x="0" y="20" font-family="Inter,sans-serif" font-size="7" fill="rgba(180,220,255,0.5)" text-anchor="middle" letter-spacing="2">MANAGEMENT</text>
+      </g>
+
+      <!-- 右侧小齿轮（cx=356, cy=82, r=36, 逆向旋转） -->
+      <g transform="translate(356,82)">
+        <animateTransform attributeName="transform" type="rotate" from="0 356 82" to="-360 356 82" dur="10s" repeatCount="indefinite" additive="replace"/>
+        <path d="
+          M0,-44 L6,-40 L6,-32 L0,-36 L-6,-32 L-6,-40 Z
+          M10,-42 L14,-36 L10,-28 L6,-32 L6,-40 Z
+          M-10,-42 L-14,-36 L-10,-28 L-6,-32 L-6,-40 Z
+          M18,-38 L20,-30 L14,-24 L10,-28 L14,-36 Z
+          M-18,-38 L-20,-30 L-14,-24 L-10,-28 L-14,-36 Z
+          M22,-28 L22,-20 L16,-18 L14,-24 L20,-30 Z
+          M-22,-28 L-22,-20 L-16,-18 L-14,-24 L-20,-30 Z
+          M22,-16 L20,-8 L14,-8 L16,-18 L22,-20 Z
+          M-22,-16 L-20,-8 L-14,-8 L-16,-18 L-22,-20 Z
+          M20,-6 L16,4 L10,2 L14,-8 L20,-8 Z
+          M-20,-6 L-16,4 L-10,2 L-14,-8 L-20,-8 Z
+          M14,6 L8,14 L4,10 L10,2 L16,4 Z
+          M-14,6 L-8,14 L-4,10 L-10,2 L-16,4 Z
+          M6,16 L-6,16 L-4,10 L4,10 Z
+        " fill="url(#gearMetal2)" stroke="rgba(80,160,220,0.25)" stroke-width="0.5"/>
+        <circle r="30" fill="url(#gearMetal2)" stroke="rgba(80,160,220,0.3)" stroke-width="0.8"/>
+        <circle r="22" fill="url(#clockFace)" stroke="rgba(100,180,240,0.2)" stroke-width="0.8"/>
+        <g stroke="rgba(180,210,240,0.4)" stroke-width="1">
+          <line x1="0" y1="-18" x2="0" y2="-14"/>
+          <line x1="9" y1="-16" x2="7.5" y2="-12.5"/>
+          <line x1="16" y1="-9" x2="13" y2="-7.5"/>
+          <line x1="18" y1="0" x2="14" y2="0"/>
+          <line x1="16" y1="9" x2="13" y2="7.5"/>
+          <line x1="9" y1="16" x2="7.5" y2="12.5"/>
+          <line x1="0" y1="18" x2="0" y2="14"/>
+          <line x1="-9" y1="16" x2="-7.5" y2="12.5"/>
+          <line x1="-16" y1="9" x2="-13" y2="7.5"/>
+          <line x1="-18" y1="0" x2="-14" y2="0"/>
+          <line x1="-16" y1="-9" x2="-13" y2="-7.5"/>
+          <line x1="-9" y1="-16" x2="-7.5" y2="-12.5"/>
+        </g>
+        <!-- 分针 -->
+        <line x1="0" y1="2" x2="6" y2="-16" stroke="rgba(200,230,255,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle r="3" fill="url(#goldMetal)"/>
+        <circle r="1.2" fill="#fff8e0"/>
+      </g>
+
+      <!-- 左侧小齿轮（cx=124, cy=82, r=36） -->
+      <g transform="translate(124,82)">
+        <animateTransform attributeName="transform" type="rotate" from="0 124 82" to="-360 124 82" dur="10s" repeatCount="indefinite" additive="replace"/>
+        <path d="
+          M0,-44 L6,-40 L6,-32 L0,-36 L-6,-32 L-6,-40 Z
+          M10,-42 L14,-36 L10,-28 L6,-32 L6,-40 Z
+          M-10,-42 L-14,-36 L-10,-28 L-6,-32 L-6,-40 Z
+          M18,-38 L20,-30 L14,-24 L10,-28 L14,-36 Z
+          M-18,-38 L-20,-30 L-14,-24 L-10,-28 L-14,-36 Z
+          M22,-28 L22,-20 L16,-18 L14,-24 L20,-30 Z
+          M-22,-28 L-22,-20 L-16,-18 L-14,-24 L-20,-30 Z
+          M22,-16 L20,-8 L14,-8 L16,-18 L22,-20 Z
+          M-22,-16 L-20,-8 L-14,-8 L-16,-18 L-22,-20 Z
+          M20,-6 L16,4 L10,2 L14,-8 L20,-8 Z
+          M-20,-6 L-16,4 L-10,2 L-14,-8 L-20,-8 Z
+          M14,6 L8,14 L4,10 L10,2 L16,4 Z
+          M-14,6 L-8,14 L-4,10 L-10,2 L-16,4 Z
+          M6,16 L-6,16 L-4,10 L4,10 Z
+        " fill="url(#gearMetal3)" stroke="rgba(80,160,220,0.25)" stroke-width="0.5"/>
+        <circle r="30" fill="url(#gearMetal3)" stroke="rgba(80,160,220,0.3)" stroke-width="0.8"/>
+        <circle r="22" fill="url(#clockFace)" stroke="rgba(100,180,240,0.2)" stroke-width="0.8"/>
+        <g stroke="rgba(180,210,240,0.4)" stroke-width="1">
+          <line x1="0" y1="-18" x2="0" y2="-14"/>
+          <line x1="9" y1="-16" x2="7.5" y2="-12.5"/>
+          <line x1="16" y1="-9" x2="13" y2="-7.5"/>
+          <line x1="18" y1="0" x2="14" y2="0"/>
+          <line x1="16" y1="9" x2="13" y2="7.5"/>
+          <line x1="9" y1="16" x2="7.5" y2="12.5"/>
+          <line x1="0" y1="18" x2="0" y2="14"/>
+          <line x1="-9" y1="16" x2="-7.5" y2="12.5"/>
+          <line x1="-16" y1="9" x2="-13" y2="7.5"/>
+          <line x1="-18" y1="0" x2="-14" y2="0"/>
+          <line x1="-16" y1="-9" x2="-13" y2="-7.5"/>
+          <line x1="-9" y1="-16" x2="-7.5" y2="-12.5"/>
+        </g>
+        <line x1="0" y1="2" x2="-8" y2="-14" stroke="rgba(200,230,255,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle r="3" fill="url(#goldMetal)"/>
+        <circle r="1.2" fill="#fff8e0"/>
+      </g>
+
+      <!-- 右下小齿轮 -->
+      <g transform="translate(390,178)">
+        <animateTransform attributeName="transform" type="rotate" from="0 390 178" to="360 390 178" dur="14s" repeatCount="indefinite" additive="replace"/>
+        <path d="
+          M0,-32 L5,-28 L5,-22 L0,-26 L-5,-22 L-5,-28 Z
+          M8,-30 L12,-24 L8,-18 L5,-22 L5,-28 Z
+          M-8,-30 L-12,-24 L-8,-18 L-5,-22 L-5,-28 Z
+          M14,-24 L16,-16 L10,-12 L8,-18 L12,-24 Z
+          M-14,-24 L-16,-16 L-10,-12 L-8,-18 L-12,-24 Z
+          M16,-14 L16,-6 L10,-4 L10,-12 L16,-16 Z
+          M-16,-14 L-16,-6 L-10,-4 L-10,-12 L-16,-16 Z
+          M16,-2 L12,6 L8,4 L10,-4 L16,-6 Z
+          M-16,-2 L-12,6 L-8,4 L-10,-4 L-16,-6 Z
+          M10,8 L4,14 L2,10 L8,4 L12,6 Z
+          M-10,8 L-4,14 L-2,10 L-8,4 L-12,6 Z
+          M2,16 L-2,16 L-2,10 L2,10 Z
+        " fill="url(#gearMetal2)" stroke="rgba(80,160,220,0.2)" stroke-width="0.4"/>
+        <circle r="22" fill="url(#gearMetal2)" stroke="rgba(80,160,220,0.25)" stroke-width="0.6"/>
+        <circle r="15" fill="url(#clockFace)" opacity="0.8"/>
+        <circle r="2.5" fill="url(#goldMetal)"/>
+      </g>
+
+      <!-- 左下小齿轮 -->
+      <g transform="translate(90,178)">
+        <animateTransform attributeName="transform" type="rotate" from="0 90 178" to="360 90 178" dur="14s" repeatCount="indefinite" additive="replace"/>
+        <path d="
+          M0,-32 L5,-28 L5,-22 L0,-26 L-5,-22 L-5,-28 Z
+          M8,-30 L12,-24 L8,-18 L5,-22 L5,-28 Z
+          M-8,-30 L-12,-24 L-8,-18 L-5,-22 L-5,-28 Z
+          M14,-24 L16,-16 L10,-12 L8,-18 L12,-24 Z
+          M-14,-24 L-16,-16 L-10,-12 L-8,-18 L-12,-24 Z
+          M16,-14 L16,-6 L10,-4 L10,-12 L16,-16 Z
+          M-16,-14 L-16,-6 L-10,-4 L-10,-12 L-16,-16 Z
+          M16,-2 L12,6 L8,4 L10,-4 L16,-6 Z
+          M-16,-2 L-12,6 L-8,4 L-10,-4 L-16,-6 Z
+          M10,8 L4,14 L2,10 L8,4 L12,6 Z
+          M-10,8 L-4,14 L-2,10 L-8,4 L-12,6 Z
+          M2,16 L-2,16 L-2,10 L2,10 Z
+        " fill="url(#gearMetal3)" stroke="rgba(80,160,220,0.2)" stroke-width="0.4"/>
+        <circle r="22" fill="url(#gearMetal3)" stroke="rgba(80,160,220,0.25)" stroke-width="0.6"/>
+        <circle r="15" fill="url(#clockFace)" opacity="0.8"/>
+        <circle r="2.5" fill="url(#goldMetal)"/>
+      </g>
+
+      <!-- 四个模块标签（齿轮之间） -->
+      <g font-family="Inter,sans-serif" font-weight="700" font-size="7.5">
+        <!-- MACRO -->
+        <rect x="56" y="16" width="54" height="14" rx="3" fill="rgba(224,120,32,0.75)"/>
+        <text x="83" y="27" fill="#fff8d0" text-anchor="middle">MACRO · 识大局</text>
+        <!-- BUSINESS -->
+        <rect x="366" y="16" width="70" height="14" rx="3" fill="rgba(224,120,32,0.75)"/>
+        <text x="401" y="27" fill="#fff8d0" text-anchor="middle">BUSINESS · 抓经营</text>
+        <!-- TEAM -->
+        <rect x="22" y="148" width="52" height="14" rx="3" fill="rgba(60,150,210,0.7)"/>
+        <text x="48" y="159" fill="#d8f0ff" text-anchor="middle">TEAM · 带队伍</text>
+        <!-- WISDOM -->
+        <rect x="360" y="148" width="62" height="14" rx="3" fill="rgba(60,150,210,0.7)"/>
+        <text x="391" y="159" fill="#d8f0ff" text-anchor="middle">WISDOM · 修内功</text>
+      </g>
+
+      <!-- 中央时钟发光环 -->
+      <circle cx="240" cy="130" r="70" fill="none" stroke="rgba(100,180,255,0.12)" stroke-width="2" filter="url(#glow)"/>
+      <circle cx="240" cy="130" r="80" fill="none" stroke="rgba(224,120,32,0.08)" stroke-width="1.5"/>
+
+      <!-- 连接杆（齿轮间传动） -->
+      <line x1="176" y1="105" x2="200" y2="115" stroke="rgba(100,180,240,0.25)" stroke-width="1.5"/>
+      <line x1="304" y1="105" x2="280" y2="115" stroke="rgba(100,180,240,0.25)" stroke-width="1.5"/>
+      <line x1="176" y1="155" x2="205" y2="148" stroke="rgba(100,180,240,0.2)" stroke-width="1"/>
+      <line x1="304" y1="155" x2="275" y2="148" stroke="rgba(100,180,240,0.2)" stroke-width="1"/>
+
+      <!-- 流光扫线 -->
+      <line x1="0" y1="220" x2="480" y2="220" stroke="rgba(224,120,32,0.2)" stroke-width="0.8" stroke-dasharray="20,15">
+        <animate attributeName="stroke-dashoffset" from="0" to="-70" dur="6s" repeatCount="indefinite"/>
+      </line>
+
+      <!-- 底部渐变遮罩 -->
+      <rect x="0" y="190" width="480" height="70" fill="url(#btmFade)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ SECTION 1: 引言 ═══ -->
+<section class="section section-white">
+  <div class="section-label">ACADEMIC ANCHOR</div>
+  <h2 class="section-title">为快速上升期管理者而设</h2>
+  <p class="intro-text">
+    本课程专为处于快速上升期的中高层管理者设计，聚焦「实战工具」与「经营落地」，助您建立财务思维、打通部门壁垒、提升决策执行力，从「业务能手」蜕变为「职业化操盘手」。
+  </p>
+  <div class="fudan-seal">
+    <div class="seal-icon"><span>复</span></div>
+    <div class="seal-text">
+      <strong>复旦大学管理学院</strong><br>
+      高层管理教育（EE）· 上海
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: 核心价值 ═══ -->
+<section class="section section-dark">
+  <div class="section-label" style="color:rgba(224,120,32,0.7)">CORE VALUES</div>
+  <h2 class="section-title">四维能力跃升体系</h2>
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-card-en">ROLE SHIFT</div>
+      <div class="value-card-zh">角色跃迁</div>
+      <div class="value-card-desc">从执行者到决策者的系统性跨越</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">FINANCE</div>
+      <div class="value-card-zh">财务思维</div>
+      <div class="value-card-desc">建立数字经营视角与财务判断力</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">TEAM</div>
+      <div class="value-card-zh">团队激活</div>
+      <div class="value-card-desc">激发组织潜能，实现协同突破</div>
+    </div>
+    <div class="value-card">
+      <div class="value-card-en">DECISION</div>
+      <div class="value-card-zh">决策升级</div>
+      <div class="value-card-desc">在复杂局面中快速精准做决策</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: 四大模块 ═══ -->
+<section class="section section-bg">
+  <div class="section-label">CURRICULUM</div>
+  <h2 class="section-title" style="color:var(--primary)">四大核心模块</h2>
+
+  <div class="module-card">
+    <div class="module-en">MACRO · 识大局</div>
+    <div class="module-title">模块一：战略执行与目标落地</div>
+    <div class="module-sub">战略解码 · OKR工具 · 跨层传导机制</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">孙立坚 · 宁钟</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">BUSINESS · 抓经营</div>
+    <div class="module-title">模块二：财务实务与运营增效</div>
+    <div class="module-sub">财务报表解读 · 成本管控 · 运营指标体系</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">李远鹏 · 李旭</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">TEAM · 带队伍</div>
+    <div class="module-title">模块三：团队协同与绩效管理</div>
+    <div class="module-sub">激励机制 · 绩效对话 · 跨部门协作</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">高健 · 潘黎</span>
+    </div>
+  </div>
+
+  <div class="module-card">
+    <div class="module-en">WISDOM · 修内功</div>
+    <div class="module-title">模块四：职业素养与管理心法</div>
+    <div class="module-sub">领导力人格 · 商业伦理 · 管理者心智</div>
+    <div class="module-faculty">
+      <span class="faculty-label">主讲师资</span>
+      <span class="faculty-names">韩昇 · 胥正川</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: 学习安排 ═══ -->
+<section class="section section-dark">
+  <div class="section-label" style="color:rgba(224,120,32,0.7)">SCHEDULE</div>
+  <h2 class="section-title">学习安排</h2>
+  <div class="arrange-grid">
+    <div class="arrange-card">
+      <div class="arrange-num">10<span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.5)"> 个月</span></div>
+      <div class="arrange-desc">完整学制</div>
+    </div>
+    <div class="arrange-card">
+      <div class="arrange-num">2<span style="font-size:14px;font-weight:400;color:rgba(255,255,255,0.5)"> 天</span></div>
+      <div class="arrange-desc">每月周末<br>集中学习</div>
+    </div>
+    <div class="arrange-card">
+      <div style="font-size:26px;margin-bottom:6px;">🎯</div>
+      <div class="arrange-desc">实战<br>工具箱</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: 学员画像 ═══ -->
+<section class="section section-white">
+  <div class="section-label">PROFILE</div>
+  <h2 class="section-title">精英学员画像</h2>
+
+  <div class="portrait-stats">
+    <div class="stat-card">
+      <div class="stat-num">38<sup>岁</sup></div>
+      <div class="stat-label">平均<br>学员年龄</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">65<sup style="font-size:12px">%</sup></div>
+      <div class="stat-label">核心<br>执行层</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:18px;padding-top:4px">MNC+</div>
+      <div class="stat-label">跨国企业<br>管理者</div>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">行业分布</div>
+    <div class="bar-row">
+      <div class="bar-label">先进制造</div>
+      <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+      <div class="bar-pct">35%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">汽车产业</div>
+      <div class="bar-track"><div class="bar-fill accent" style="width:20%"></div></div>
+      <div class="bar-pct">20%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">现代服务</div>
+      <div class="bar-track"><div class="bar-fill" style="width:18%"></div></div>
+      <div class="bar-pct">18%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">IT/其他</div>
+      <div class="bar-track"><div class="bar-fill accent" style="width:27%"></div></div>
+      <div class="bar-pct">27%</div>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">职能角色</div>
+    <div class="bar-row">
+      <div class="bar-label">营销销售</div>
+      <div class="bar-track"><div class="bar-fill accent" style="width:40%"></div></div>
+      <div class="bar-pct">40%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">运营生产</div>
+      <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+      <div class="bar-pct">25%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">财务人事</div>
+      <div class="bar-track"><div class="bar-fill accent" style="width:20%"></div></div>
+      <div class="bar-pct">20%</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">研发技术</div>
+      <div class="bar-track"><div class="bar-fill" style="width:15%"></div></div>
+      <div class="bar-pct">15%</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: 学员评价 ═══ -->
+<section class="section section-bg">
+  <div class="section-label">TESTIMONIALS</div>
+  <h2 class="section-title" style="color:var(--primary)">学员评价</h2>
+
+  <div class="review-card">
+    <div class="quote-mark">"</div>
+    <p class="review-text">
+      在这里我学到的不只是管理工具，而是一种思维框架。课程让我真正理解了财务与运营的内在逻辑，回去之后直接用在了项目决策里，效果立竿见影。
+    </p>
+    <div class="review-author">
+      <div class="author-avatar">姚</div>
+      <div>
+        <div class="author-info-name">姚红</div>
+        <div class="author-info-title">良医汇 副总裁</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-card">
+    <div class="quote-mark">"</div>
+    <p class="review-text">
+      复旦的师资阵容令人印象深刻，每一位老师都有极强的实战背景。同学之间的交流也让我大开眼界，建立了跨行业的高质量人脉网络。
+    </p>
+    <div class="review-author">
+      <div class="author-avatar">陈</div>
+      <div>
+        <div class="author-info-name">陈可</div>
+        <div class="author-info-title">欧姆龙 总监</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 7: CTA ═══ -->
+<section class="cta-section">
+  <div class="cta-label">ENROLLMENT NOW OPEN</div>
+  <h2 class="cta-title">高级经理工商管理核心课程</h2>
+  <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:4px;">学费总额</div>
+  <div class="cta-price"><span>RMB </span>98,000</div>
+  <a href="tel:02125011512" class="cta-btn">立即咨询报名</a>
+  <div class="cta-phone">
+    招生热线：<a href="tel:02125011512">021-25011512</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">复旦大学管理学院</div>
+  <div class="footer-sub">高层管理教育（EE） · Executive Education</div>
+  <div class="footer-divider"></div>
+  <div class="footer-motto">博学而笃志 · 切问而近思</div>
+</footer>
+
+</body>
+</html>

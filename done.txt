@@ -1,0 +1,10 @@
+/Users/liuluheng/.openclaw/workspace/memory/courses/AI领创.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/CFO.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/CMO.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/企业家班.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/供应链.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/全球数字经济.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/医疗科技.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/哲学.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/资本并购.md
+/Users/liuluheng/.openclaw/workspace/memory/courses/高经班.md
