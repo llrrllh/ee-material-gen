@@ -33,19 +33,27 @@ app.add_middleware(
 
 # 初始化组件
 BASE_DIR = Path(__file__).parent
-WORKFILES_DIR = Path("/Users/liuluheng/Library/CloudStorage/OneDrive-个人/Workfiles")
-VISUAL_ASSETS_DIR = WORKFILES_DIR / "08.视觉素材"
-HISTORY_DIR = BASE_DIR / "history"
+# Windows 兼容：支持从环境变量或相对路径加载视觉资产
+WORKFILES_DIR = os.getenv("WORKFILES_DIR")
+if WORKFILES_DIR:
+    VISUAL_ASSETS_DIR = Path(WORKFILES_DIR) / "08.视觉素材"
+else:
+    # 默认使用项目目录下的 assets 文件夹
+    VISUAL_ASSETS_DIR = BASE_DIR / "assets"
 
-# 确保历史目录存在
+HISTORY_DIR = BASE_DIR / "history"
+EXPORTS_DIR = BASE_DIR / "exports"
+
+# 确保必要目录存在
 HISTORY_DIR.mkdir(exist_ok=True)
+EXPORTS_DIR.mkdir(exist_ok=True)
 
 gemini_client = GeminiClient()
 prompt_builder = PromptBuilder(base_dir=BASE_DIR)
 
 # 挂载静态文件
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
-# 挂载视觉资产目录
+# 挂载视觉资产目录（如果存在）
 if VISUAL_ASSETS_DIR.exists():
     app.mount("/assets", StaticFiles(directory=str(VISUAL_ASSETS_DIR)), name="assets")
 
@@ -284,7 +292,7 @@ async def export_material(request: ExportRequest):
     try:
         # 创建导出目录
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        export_dir = BASE_DIR / "exports" / f"{timestamp}_{request.filename}"
+        export_dir = EXPORTS_DIR / f"{timestamp}_{request.filename}"
         export_dir.mkdir(parents=True, exist_ok=True)
 
         # 保存 HTML
