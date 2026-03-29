@@ -170,6 +170,13 @@ class BatchGenerateRequest(BaseModel):
     user_requirements: str = ""
 
 
+class DraftRequest(BaseModel):
+    """草稿请求"""
+    html: str
+    course_id: Optional[str] = None
+    material_type: Optional[str] = None
+
+
 # ==================== API 接口 ====================
 
 # 全局异常处理器
@@ -590,6 +597,40 @@ async def delete_history_by_id(history_id: str):
         return JSONResponse(content={"success": True, "id": history_id})
     except HTTPException:
         raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ==================== 草稿管理 ====================
+
+DRAFT_FILE = BASE_DIR / "draft.json"
+
+
+@app.post("/api/draft")
+async def save_draft(request: DraftRequest):
+    """保存草稿"""
+    try:
+        draft_data = {
+            "html": request.html,
+            "course_id": request.course_id,
+            "material_type": request.material_type,
+            "timestamp": datetime.now().isoformat()
+        }
+        with open(DRAFT_FILE, 'w', encoding='utf-8') as f:
+            json.dump(draft_data, f, ensure_ascii=False, indent=2)
+        return JSONResponse(content={"success": True})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/draft")
+async def get_draft():
+    """获取草稿"""
+    try:
+        if DRAFT_FILE.exists():
+            with open(DRAFT_FILE, 'r', encoding='utf-8') as f:
+                return JSONResponse(content=json.load(f))
+        return JSONResponse(content=None)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
