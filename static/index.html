@@ -1294,6 +1294,11 @@
         let previewContentHeight = 1200;
         const PREVIEW_SAFE_PADDING = 20;
         let currentHistoryContext = null;
+
+        // 撤销/重做
+        let undoStack = [];
+        let redoStack = [];
+        const MAX_UNDO_STACK = 50;
         let currentSavedHistoryId = null;
         let previewPaneRatio = 0.58;
         let isEditorPaneResizing = false;
@@ -1340,6 +1345,37 @@
         }
 
         // 安全渲染预览（避免直接访问 iframe 文档对象）
+        // 撤销/重做功能
+        function saveToUndoStack(html) {
+            if (undoStack.length === 0 || undoStack[undoStack.length - 1] !== html) {
+                undoStack.push(html);
+                if (undoStack.length > MAX_UNDO_STACK) {
+                    undoStack.shift();
+                }
+                redoStack = [];
+            }
+        }
+
+        function undo() {
+            if (undoStack.length > 1) {
+                redoStack.push(undoStack.pop());
+                const html = undoStack[undoStack.length - 1];
+                currentHtml = html;
+                if (monacoEditor) monacoEditor.setValue(html);
+                renderPreview(html);
+            }
+        }
+
+        function redo() {
+            if (redoStack.length > 0) {
+                const html = redoStack.pop();
+                undoStack.push(html);
+                currentHtml = html;
+                if (monacoEditor) monacoEditor.setValue(html);
+                renderPreview(html);
+            }
+        }
+
         function renderPreview(html) {
             const iframe = document.getElementById('previewFrame');
             const previewScroller = document.getElementById('previewScroller');
@@ -2408,6 +2444,7 @@
             currentPrompt = data.prompt_used;
             currentModel = data.model_used;
             currentHistoryContext = historyContext || getFallbackHistoryContext();
+            saveToUndoStack(data.html);
             markCurrentResultUnsaved();
 
             // 更新预览
@@ -2539,6 +2576,17 @@
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', init);
+
+        // 快捷键支持
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+                e.preventDefault();
+                undo();
+            } else if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
+                e.preventDefault();
+                redo();
+            }
+        });
     </script>
 
     <!-- 导出对话框 -->
