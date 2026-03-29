@@ -1,0 +1,169 @@
+{
+  "courses": [
+    {
+      "course_id": "EE-QYJ",
+      "name": "企业家战略思维与创新管理课程",
+      "short_name": "企业家班",
+      "primary_color": "#2E7AB8",
+      "accent_color": "#E8B84A",
+      "bg_dark": "#1A3A6B",
+      "bg_light": "#F5F3EE",
+      "prompt_file": "prompts/courses/EE-QYJ.txt"
+    },
+    {
+      "course_id": "EE-CMO",
+      "name": "首席营销官（CMO）课程",
+      "short_name": "CMO课程",
+      "primary_color": "#1565A8",
+      "accent_color": "#E85A2C",
+      "bg_dark": "#0D4A7A",
+      "bg_light": "#EEF4FA",
+      "prompt_file": "prompts/courses/EE-CMO.txt"
+    },
+    {
+      "course_id": "EE-CFO",
+      "name": "首席财务官（CFO）课程",
+      "short_name": "CFO课程",
+      "primary_color": "#1A5694",
+      "accent_color": "#E85A2C",
+      "bg_dark": "#0C3A6B",
+      "bg_light": "#EEF3FA",
+      "prompt_file": "prompts/courses/EE-CFO.txt"
+    },
+    {
+      "course_id": "EE-GMP",
+      "name": "高级经理工商管理核心课程",
+      "short_name": "GMP课程",
+      "primary_color": "#00A3D9",
+      "accent_color": "#E85A2C",
+      "bg_dark": "#1A5694",
+      "bg_light": "#E8F7FD",
+      "prompt_file": "prompts/courses/EE-GMP.txt"
+    },
+    {
+      "course_id": "EE-SCM",
+      "name": "全球供应链管理课程",
+      "short_name": "供应链课程",
+      "primary_color": "#2AAA8A",
+      "accent_color": "#C8E550",
+      "bg_dark": "#1A6B55",
+      "bg_light": "#F2F4F0",
+      "prompt_file": "prompts/courses/EE-SCM.txt"
+    },
+    {
+      "course_id": "EE-FCA",
+      "name": "非财人员的财务管理课程",
+      "short_name": "非财课程",
+      "primary_color": "#1E3A5F",
+      "accent_color": "#D4A84B",
+      "bg_dark": "#1A3355",
+      "bg_light": "#EEF2F8",
+      "prompt_file": "prompts/courses/EE-FCA.txt"
+    },
+    {
+      "course_id": "EE-MA",
+      "name": "资本运作与并购重组企业家课程",
+      "short_name": "资本运作课程",
+      "primary_color": "#C9A86C",
+      "accent_color": "#D4B896",
+      "bg_dark": "#0A1628",
+      "bg_light": "#F5F0E8",
+      "prompt_file": "prompts/courses/EE-MA.txt"
+    },
+    {
+      "course_id": "EE-AI",
+      "name": "人工智能领创计划（第2期）",
+      "short_name": "AI领创",
+      "primary_color": "#1E4B8E",
+      "accent_color": "#A8C4D9",
+      "bg_dark": "#0D2E5C",
+      "bg_light": "#EBF2FA",
+      "prompt_file": "prompts/courses/EE-AI.txt"
+    },
+    {
+      "course_id": "EE-DH",
+      "name": "复旦大学生命健康产业领军计划（大健康）",
+      "short_name": "大健康",
+      "primary_color": "#2DB5A0",
+      "accent_color": "#E8A090",
+      "bg_dark": "#1A8070",
+      "bg_light": "#D4EDE8",
+      "prompt_file": "prompts/courses/EE-DH.txt"
+    },
+    {
+      "course_id": "EE-DBA",
+      "name": "香港城市大学-复旦大学工商管理博士（DBA）合作项目",
+      "short_name": "城大复旦DBA",
+      "primary_color": "#1565A8",
+      "accent_color": "#F5821F",
+      "bg_dark": "#0D3A6B",
+      "bg_light": "#F0F5FB",
+      "prompt_file": "prompts/courses/EE-DBA.txt"
+    }
+  ],
+  "material_types": [
+    {
+      "type_id": "recruit-poster",
+      "name": "招生海报",
+      "description": "750px宽，长度自适应，单图竖版，适合微信/朋友圈",
+      "prompt_file": "prompts/types/recruit-poster.txt",
+      "export_width": 750
+    },
+    {
+      "type_id": "recruit-page",
+      "name": "项目单页",
+      "description": "A4，单页，正式对外的精简介绍",
+      "prompt_file": "prompts/types/recruit-page.txt",
+      "export_width": 794
+    },
+    {
+      "type_id": "student-profile",
+      "name": "学员画像",
+      "description": "A4, 2页，数据可视化，学员背景分析图",
+      "prompt_file": "prompts/types/student-profile.txt",
+      "export_width": 794
+    },
+    {
+      "type_id": "landing-page",
+      "name": "落地页",
+      "description": "750px宽，长度自适应，H5风格长页，含CTA",
+      "prompt_file": "prompts/types/landing-page.txt",
+      "export_width": 750
+    },
+    {
+      "type_id": "class-notice",
+      "name": "单次课程通知",
+      "description": "A4，单页，每次上课前发给学员的正式通知",
+      "prompt_file": "prompts/types/class-notice.txt",
+      "export_width": 794
+    },
+    {
+      "type_id": "student-handbook",
+      "name": "学员手册",
+      "description": "A4，多页，开学时发放的完整学员手册",
+      "prompt_file": "prompts/types/student-handbook.txt",
+      "export_width": 794
+    },
+    {
+      "type_id": "event-poster",
+      "name": "活动海报",
+      "description": "1080x1920px，朋友圈/社媒竖版海报",
+      "prompt_file": "prompts/types/event-poster.txt",
+      "export_width": 1080
+    },
+    {
+      "type_id": "long-image",
+      "name": "招生长图",
+      "description": "750px宽，长度自适应，微信长图，适合转发",
+      "prompt_file": "prompts/types/long-image.txt",
+      "export_width": 750
+    },
+    {
+      "type_id": "trifold-brochure",
+      "name": "宣传三折页",
+      "description": "A3横版展开（420×297mm），折后约99×210mm，正反两面6栏，适合印刷",
+      "prompt_file": "prompts/types/trifold-brochure.txt",
+      "export_width": 1191
+    }
+  ]
+}

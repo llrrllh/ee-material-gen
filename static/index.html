@@ -1,0 +1,2566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复旦EE 素材生成器</title>
+    <style>
+        :root {
+            /* 复旦EE标志性蓝色系 */
+            --primary-blue: #00349A;
+            --deep-blue: #001F5C;
+            --light-blue: #0052CC;
+            --accent-blue: #4A90E2;
+            --bg-dark: #0A1628;
+            --gold: #D4AF37;
+
+            /* 毛玻璃效果 */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 52, 154, 0.15);
+
+            /* 微光效果 */
+            --glow-color: rgba(74, 144, 226, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                         "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #050B14 0%, var(--bg-dark) 50%, var(--deep-blue) 100%);
+            height: 100vh;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* 背景装饰网格 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(74, 144, 226, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 144, 226, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            color: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-logo {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(0 4px 20px rgba(74, 144, 226, 0.6));
+        }
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            position: relative;
+            text-shadow: 0 0 20px rgba(74, 144, 226, 0.8),
+                         0 0 40px rgba(74, 144, 226, 0.5),
+                         0 2px 10px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(74, 144, 226, 0.6),
+                         0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px var(--glow-color);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: #D4AF37;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #E8C850;
+            box-shadow: 0 0 25px var(--glow-color);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .left-panel {
+            flex: 0 0 clamp(300px, 23vw, 410px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding: 25px;
+            overflow-y: auto;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .right-panel {
+            flex: 1;
+            min-width: 0;
+            min-height: 0;
+            background: rgba(10, 22, 40, 0.3);
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            position: relative;
+            --preview-pane-ratio: 0.58;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px var(--glow-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group select option {
+            background: var(--deep-blue);
+            color: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 12px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            background: #002870;
+        }
+
+        .divider {
+            margin: 30px 0;
+            border-top: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .divider-text {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 10px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .prompt-section {
+            margin-top: 20px;
+        }
+
+        .prompt-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .model-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .code-editor-toggle {
+            padding: 6px 12px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .code-editor-toggle:hover {
+            background: #002870;
+        }
+
+        .code-editor-container {
+            display: none;
+            flex-direction: column;
+            flex: 1 1 0;
+            min-width: 320px;
+            min-height: 0;
+            border-left: 1px solid #2d2d2d;
+            background: #1e1e1e;
+        }
+
+        .code-editor-container.active {
+            display: flex;
+        }
+
+        .right-panel.editor-active .preview-container {
+            flex: 0 0 calc(var(--preview-pane-ratio) * 100%);
+            min-width: 320px;
+        }
+
+        .editor-splitter {
+            display: none;
+            width: 8px;
+            cursor: col-resize;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(
+                180deg,
+                rgba(74, 144, 226, 0.12),
+                rgba(74, 144, 226, 0.28),
+                rgba(74, 144, 226, 0.12)
+            );
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .editor-splitter::before {
+            content: '';
+            display: block;
+            width: 2px;
+            height: 64px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .right-panel.editor-active .editor-splitter {
+            display: flex;
+        }
+
+        body.resizing,
+        body.resizing * {
+            cursor: col-resize !important;
+            user-select: none !important;
+        }
+
+        .code-editor-header {
+            padding: 10px 15px;
+            background: #2d2d2d;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-editor-header h3 {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .code-editor-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .code-editor-actions button {
+            padding: 4px 10px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .code-editor-actions button:hover {
+            background: #002870;
+        }
+
+        #monacoEditor {
+            flex: 1;
+            width: 100%;
+            min-height: 0;
+        }
+
+        .edit-dialog {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .edit-dialog h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .edit-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .edit-input-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .edit-input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .edit-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .edit-preset-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .edit-input-group button {
+            padding: 10px 20px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .edit-input-group button:hover {
+            background: #002870;
+        }
+
+        .edit-input-group button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .history-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-panel.active {
+            right: 0;
+        }
+
+        .history-header {
+            padding: 15px 20px;
+            background: #00349A;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .history-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .history-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .history-item:hover {
+            background: #e9ecef;
+            border-color: #00349A;
+        }
+
+        .history-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .history-item-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .history-item-desc {
+            font-size: 12px;
+            color: #999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .history-toggle-btn {
+            padding: 8px 16px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .history-toggle-btn:hover {
+            background: #002870;
+        }
+
+        .preview-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            min-height: 0;
+            padding: 14px 16px;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .preview-header h2 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .preview-zoom-label {
+            min-width: 52px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .preview-zoom-btn {
+            padding: 6px 10px;
+            background: #00349A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .preview-zoom-btn:hover {
+            background: #002870;
+        }
+
+        .preview-frame {
+            flex: 1;
+            min-height: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preview-scroller {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: #eef1f5;
+            padding: 12px 14px 14px;
+            scrollbar-gutter: stable;
+            overscroll-behavior: contain;
+            scroll-padding-left: 14px;
+        }
+
+        .preview-canvas {
+            display: inline-block;
+            vertical-align: top;
+            width: max-content;
+            height: max-content;
+            transform-origin: top left;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: white;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #00349A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 1366px) {
+            .left-panel {
+                flex-basis: clamp(280px, 21vw, 360px);
+            }
+
+            .code-editor-container {
+                min-width: 320px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .right-panel.editor-active .preview-container {
+                flex-basis: 52%;
+                min-width: 280px;
+            }
+
+            .code-editor-container {
+                min-width: 280px;
+            }
+        }
+        /* Toast 通知 */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .toast {
+            pointer-events: auto;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.3s ease;
+            max-width: 400px;
+            word-break: break-word;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast-success { background: rgba(34,139,34,0.92); }
+        .toast-error   { background: rgba(200,40,40,0.92); }
+        .toast-warning { background: rgba(200,150,0,0.92); }
+        .toast-info    { background: rgba(0,52,154,0.92); }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+</head>
+<body>
+    <div class="toast-container" id="toastContainer"></div>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <div class="header">
+            <div class="header-left">
+                <img src="/assets/02_EE项目标识与Logo/复旦EE_Logo_透明底反白.png" alt="复旦EE Logo" class="header-logo">
+                <div class="header-title">
+                    <h1>复旦EE 素材生成器</h1>
+                    <div class="header-subtitle">Fudan EE Marketing Material Generator</div>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <button class="history-toggle-btn" onclick="toggleHistory()">📚 历史记录</button>
+                <button class="btn btn-secondary" id="saveHistoryBtn" disabled onclick="saveCurrentHistory()">保存到历史</button>
+                <button class="btn btn-secondary" id="exportHtmlBtn" disabled onclick="openExportModal('html')">导出 HTML</button>
+                <button class="btn btn-secondary" id="exportPdfBtn" disabled onclick="openExportModal('pdf')">导出 PDF</button>
+                <button class="btn btn-primary" id="exportPngBtn" disabled onclick="openExportModal('png')">导出图片</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 左侧控制面板 -->
+            <div class="left-panel">
+                <div class="form-group">
+                    <label for="courseSelect">课程选择</label>
+                    <select id="courseSelect">
+                        <option value="">请选择课程...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="materialTypeSelect">素材类型</label>
+                    <select id="materialTypeSelect">
+                        <option value="">请选择素材类型...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="userRequirements">自定义要求</label>
+                    <textarea id="userRequirements" placeholder="例：强调AI赛道，突出投资人圈层..."></textarea>
+                </div>
+
+                <!-- Phase 2: 生成前细分控制 -->
+                <div class="divider">
+                    <span class="divider-text">风格控制（可多选）</span>
+                </div>
+
+                <div class="form-group">
+                    <label>视觉风格</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="高端杂志感" style="margin-right: 8px;">
+                            高端杂志感
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="未来科技感" style="margin-right: 8px;">
+                            未来科技感
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="纪实摄影感" style="margin-right: 8px;">
+                            纪实摄影感
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="高级极简风" style="margin-right: 8px;">
+                            高级极简风
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="商务权威风" style="margin-right: 8px;">
+                            商务权威风
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualStyle" value="国际学院风" style="margin-right: 8px;">
+                            国际学院风
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>叙事风格</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="权威严谨" style="margin-right: 8px;">
+                            权威严谨
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="痛点触发" style="margin-right: 8px;">
+                            痛点触发
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="圈层吸引" style="margin-right: 8px;">
+                            圈层吸引
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="设问式沟通" style="margin-right: 8px;">
+                            设问式沟通
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="故事化叙事" style="margin-right: 8px;">
+                            故事化叙事
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="数据驱动" style="margin-right: 8px;">
+                            数据驱动
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="情感共鸣" style="margin-right: 8px;">
+                            情感共鸣
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="专家访谈口吻" style="margin-right: 8px;">
+                            专家访谈口吻
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="结果导向表达" style="margin-right: 8px;">
+                            结果导向表达
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="narrativeStyle" value="行动召唤驱动" style="margin-right: 8px;">
+                            行动召唤驱动
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>排版特色</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="模块化布局" style="margin-right: 8px;">
+                            模块化布局
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="卡片式设计" style="margin-right: 8px;">
+                            卡片式设计
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="全屏沉浸式" style="margin-right: 8px;">
+                            全屏沉浸式
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="信息流叙事" style="margin-right: 8px;">
+                            信息流叙事
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="时间轴布局" style="margin-right: 8px;">
+                            时间轴布局
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="网格系统" style="margin-right: 8px;">
+                            网格系统
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="分栏布局" style="margin-right: 8px;">
+                            分栏布局
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="杂志封面式" style="margin-right: 8px;">
+                            杂志封面式
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="Z型阅读动线" style="margin-right: 8px;">
+                            Z型阅读动线
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="左文右图结构" style="margin-right: 8px;">
+                            左文右图结构
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="layoutStructure" value="首屏冲击+分段展开" style="margin-right: 8px;">
+                            首屏冲击+分段展开
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>使用元素</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="数字焦点化" style="margin-right: 8px;">
+                            数字焦点化
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="高对比度色系" style="margin-right: 8px;">
+                            高对比度色系
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="极简留白" style="margin-right: 8px;">
+                            极简留白
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="微动效点缀" style="margin-right: 8px;">
+                            微动效点缀
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="渐变背景" style="margin-right: 8px;">
+                            渐变背景
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="几何图形装饰" style="margin-right: 8px;">
+                            几何图形装饰
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="图标系统" style="margin-right: 8px;">
+                            图标系统
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="阴影层次" style="margin-right: 8px;">
+                            阴影层次
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="实拍人物主视觉" style="margin-right: 8px;">
+                            实拍人物主视觉
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="数据图表模块" style="margin-right: 8px;">
+                            数据图表模块
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="品牌印章元素" style="margin-right: 8px;">
+                            品牌印章元素
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="visualElements" value="标注箭头引导" style="margin-right: 8px;">
+                            标注箭头引导
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>文字内容风格</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="引言高亮" style="margin-right: 8px;">
+                            引言高亮
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="清单体呈现" style="margin-right: 8px;">
+                            清单体呈现
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="数据快照" style="margin-right: 8px;">
+                            数据快照
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="问答式结构" style="margin-right: 8px;">
+                            问答式结构
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="对比展示" style="margin-right: 8px;">
+                            对比展示
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="步骤流程" style="margin-right: 8px;">
+                            步骤流程
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="金句短句化" style="margin-right: 8px;">
+                            金句短句化
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="结论先行" style="margin-right: 8px;">
+                            结论先行
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="痛点-方案-收益" style="margin-right: 8px;">
+                            痛点-方案-收益
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentPresentation" value="证据链表达" style="margin-right: 8px;">
+                            证据链表达
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Phase 2: 局部内容开关 -->
+                <div class="divider">
+                    <span class="divider-text">内容模块（可排除）</span>
+                </div>
+
+                <div class="form-group">
+                    <label>包含以下内容模块</label>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="faculty" checked style="margin-right: 8px;">
+                            师资介绍
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="schedule" checked style="margin-right: 8px;">
+                            课程表/学制信息
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="tuition" checked style="margin-right: 8px;">
+                            学费信息
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="studentProfile" checked style="margin-right: 8px;">
+                            学员画像数据
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="curriculum" checked style="margin-right: 8px;">
+                            课程大纲
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal; cursor: pointer;">
+                            <input type="checkbox" name="contentModule" value="certification" checked style="margin-right: 8px;">
+                            认证/背书信息
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Phase 2: 视觉资产选择 -->
+                <div class="divider">
+                    <span class="divider-text">视觉资产（可选）</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="logoSelect">Logo</label>
+                    <select id="logoSelect">
+                        <option value="">不使用 Logo</option>
+                    </select>
+                </div>
+
+                <button class="generate-btn" id="generateBtn">生成素材</button>
+
+                <div class="divider">
+                    <span class="divider-text">提示词优化</span>
+                </div>
+
+                <div class="prompt-section">
+                    <div class="form-group">
+                        <label for="promptTextarea">当前提示词（可编辑）</label>
+                        <textarea id="promptTextarea" class="prompt-textarea" placeholder="生成后将显示使用的提示词..."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" id="regenerateBtn" style="width: 100%;" disabled>用此提示词重新生成</button>
+
+                    <div class="model-info" id="modelInfo">
+                        当前使用模型: <span id="modelName">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧预览区 -->
+            <div class="right-panel">
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <h2>实时预览</h2>
+                        <div class="preview-actions">
+                            <button class="preview-zoom-btn" onclick="zoomOutPreview()">缩小</button>
+                            <span class="preview-zoom-label" id="previewZoomLabel">100%</span>
+                            <button class="preview-zoom-btn" onclick="zoomInPreview()">放大</button>
+                            <button class="preview-zoom-btn" onclick="fitPreviewWidth()">适配宽度</button>
+                            <button class="preview-zoom-btn" onclick="resetPreviewZoom()">重置</button>
+                            <button class="code-editor-toggle" onclick="toggleCodeEditor()">
+                                <span id="editorToggleText">显示代码编辑器</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="preview-frame">
+                        <div class="loading" id="loading">
+                            <div class="spinner"></div>
+                            <p id="loadingMsg">正在生成素材，请稍候...</p>
+                        </div>
+
+                        <div class="empty-state" id="emptyState">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/>
+                            </svg>
+                            <p>选择课程和素材类型，点击"生成素材"开始</p>
+                        </div>
+
+                        <div class="preview-scroller" id="previewScroller" style="display: none;">
+                            <div class="preview-canvas" id="previewCanvas">
+                                <iframe id="previewFrame" sandbox="allow-same-origin" referrerpolicy="no-referrer"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 对话式微调 -->
+                    <div class="edit-dialog" id="editDialog" style="display: none;">
+                        <h3>💬 对话式微调</h3>
+                        <div class="edit-input-group">
+                            <div class="edit-input-main">
+                                <textarea id="editInstruction" placeholder="例如：把标题字号放大、换个颜色、增加一个按钮..."></textarea>
+                                <div class="edit-presets">
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="优化标题层级" checked>
+                                        <span>优化标题层级</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="精简冗余文案" checked>
+                                        <span>精简冗余文案</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="强化 CTA 按钮与行动召唤" checked>
+                                        <span>强化 CTA</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="统一留白与间距节奏" checked>
+                                        <span>统一留白间距</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="提升对比度与可读性">
+                                        <span>提升可读性</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="校正文案错别字与标点一致性">
+                                        <span>校对文案</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="压缩首屏信息密度，突出核心卖点">
+                                        <span>首屏聚焦卖点</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="优化段落行长与行距，提升阅读流畅度">
+                                        <span>优化行距节奏</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="统一按钮尺寸、圆角与悬停反馈">
+                                        <span>统一按钮样式</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="补强移动端适配，避免元素重叠和截断">
+                                        <span>加强移动端适配</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="增强视觉层次：标题区、内容区、行动区层次更清晰">
+                                        <span>增强视觉层次</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="强化信息分组与模块边界，减少视觉噪音">
+                                        <span>强化模块分组</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="补充数据与事实表达的可信度元素（数字、来源、标签）">
+                                        <span>补强可信度表达</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="优化配色对比，确保弱光环境和投屏场景下可读">
+                                        <span>优化投屏可读性</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="统一图标与插画风格，避免风格混杂">
+                                        <span>统一图形风格</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="压缩冗长段落为要点式表达，增强可扫读性">
+                                        <span>增强可扫读性</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="增强行动路径引导（主CTA-次CTA-联系信息）">
+                                        <span>优化转化路径</span>
+                                    </label>
+                                    <label class="edit-preset-item">
+                                        <input type="checkbox" name="editPreset" value="提升无障碍友好性（对比度、字号、可点击区域）">
+                                        <span>提升无障碍体验</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <button id="applyEditBtn" onclick="applyEdit()">应用修改</button>
+                                <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; cursor: pointer;">
+                                    <input type="checkbox" id="useClaudeCheckbox" style="cursor: pointer;">
+                                    <span>使用 Claude 优化（更精准）</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; cursor: pointer;">
+                                    <input type="checkbox" id="useGPTCheckbox" style="cursor: pointer;">
+                                    <span>使用 GPT 优化</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-splitter" id="editorSplitter" title="拖拽调整预览与代码编辑器宽度"></div>
+
+                <!-- 代码编辑器 -->
+                <div class="code-editor-container" id="codeEditorContainer">
+                    <div class="code-editor-header">
+                        <h3>HTML/CSS 代码编辑器</h3>
+                        <div class="code-editor-actions">
+                            <button onclick="applyCodeChanges()">应用更改</button>
+                            <button onclick="resetCode()">重置</button>
+                        </div>
+                    </div>
+                    <div id="monacoEditor"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 历史记录面板 -->
+    <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+            <h3>📚 历史记录</h3>
+            <button class="history-close" onclick="toggleHistory()">×</button>
+        </div>
+        <div class="history-list" id="historyList">
+            <p style="text-align: center; color: #999; padding: 20px;">加载中...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentHtml = '';
+        let currentPrompt = '';
+        let currentModel = '';
+        let monacoEditor = null;
+        let isEditorSyncing = false;
+        let previewScale = 1;
+        let previewBlobUrl = null;
+        let previewContentWidth = 750;
+        let previewContentHeight = 1200;
+        const PREVIEW_SAFE_PADDING = 20;
+        let currentHistoryContext = null;
+        let currentSavedHistoryId = null;
+        let previewPaneRatio = 0.58;
+        let isEditorPaneResizing = false;
+
+        // Toast 通知系统
+        function showToast(message, type = 'info', duration = 3000) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.add('show'));
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        const PREVIEW_PANE_RATIO_STORAGE_KEY = 'ee-material-preview-pane-ratio-v1';
+        const PREVIEW_PANE_RATIO_MIN = 0.34;
+        const PREVIEW_PANE_RATIO_MAX = 0.82;
+        const PREVIEW_SCALE_MIN = 0.05;
+        const PREVIEW_SCALE_MAX = 2.0;
+        const PREVIEW_FIT_GUTTER = 18;
+        const PREVIEW_BOUNDARY_X_LIMIT = 12000;
+        const PREVIEW_BOUNDARY_Y_LIMIT = 200000;
+        const PREVIEW_MAX_CONTENT_WIDTH = 4200;
+        const PREVIEW_MAX_CONTENT_HEIGHT = 60000;
+
+        // 初始化
+        async function init() {
+            await loadCourses();
+            await loadMaterialTypes();
+            await loadVisualAssets();  // 加载视觉资产
+            restoreFormState();  // 恢复之前保存的状态
+            restoreEditorLayout();
+            setupEventListeners();
+            setupAutoSave();  // 设置自动保存
+            setupEditorSplitter();
+            applyEditorPaneRatio(previewPaneRatio, false);
+            updateSaveHistoryButton();
+            initMonacoEditor();  // 初始化Monaco Editor
+            loadHistory();  // 加载历史记录
+        }
+
+        // 安全渲染预览（避免直接访问 iframe 文档对象）
+        function renderPreview(html) {
+            const iframe = document.getElementById('previewFrame');
+            const previewScroller = document.getElementById('previewScroller');
+            const content = (html || '').trim() || '<!DOCTYPE html><html><body></body></html>';
+
+            if (previewBlobUrl) {
+                URL.revokeObjectURL(previewBlobUrl);
+                previewBlobUrl = null;
+            }
+
+            const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+            previewBlobUrl = URL.createObjectURL(blob);
+            iframe.onload = () => {
+                syncPreviewCanvasSize();
+                fitPreviewWidth({ resetViewport: true, allowZoomIn: false });
+            };
+            iframe.src = previewBlobUrl;
+
+            previewScroller.style.display = 'block';
+            document.getElementById('emptyState').style.display = 'none';
+        }
+
+        function syncPreviewCanvasSize() {
+            const iframe = document.getElementById('previewFrame');
+            const canvas = document.getElementById('previewCanvas');
+            const doc = iframe.contentDocument;
+            const frameWindow = iframe.contentWindow;
+            if (!doc || !frameWindow) return;
+
+            const htmlEl = doc.documentElement;
+            const bodyEl = doc.body;
+            let minX = 0;
+            let minY = 0;
+            let maxX = Math.max(
+                750,
+                htmlEl ? htmlEl.scrollWidth : 0,
+                bodyEl ? bodyEl.scrollWidth : 0
+            );
+            let maxY = Math.max(
+                900,
+                htmlEl ? htmlEl.scrollHeight : 0,
+                bodyEl ? bodyEl.scrollHeight : 0
+            );
+
+            if (bodyEl) {
+                bodyEl.querySelectorAll('*').forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    if (!Number.isFinite(rect.left) || !Number.isFinite(rect.right)) return;
+                    if (rect.width <= 0 && rect.height <= 0) return;
+
+                    const left = rect.left + frameWindow.scrollX;
+                    const right = rect.right + frameWindow.scrollX;
+                    const top = rect.top + frameWindow.scrollY;
+                    const bottom = rect.bottom + frameWindow.scrollY;
+
+                    // 过滤异常离屏元素，避免把预览画布撑到不可用
+                    if (
+                        left < -PREVIEW_BOUNDARY_X_LIMIT ||
+                        right > PREVIEW_BOUNDARY_X_LIMIT ||
+                        top < -PREVIEW_BOUNDARY_Y_LIMIT ||
+                        bottom > PREVIEW_BOUNDARY_Y_LIMIT
+                    ) {
+                        return;
+                    }
+
+                    minX = Math.min(minX, left);
+                    minY = Math.min(minY, top);
+                    maxX = Math.max(maxX, right);
+                    maxY = Math.max(maxY, bottom);
+                });
+            }
+
+            const width = Math.max(750, Math.ceil(maxX - minX));
+            const height = Math.max(900, Math.ceil(maxY - minY));
+            const safeWidth = Math.min(PREVIEW_MAX_CONTENT_WIDTH, width);
+            const safeHeight = Math.min(PREVIEW_MAX_CONTENT_HEIGHT, height);
+            const offsetX = PREVIEW_SAFE_PADDING - Math.floor(minX);
+            const offsetY = PREVIEW_SAFE_PADDING - Math.floor(minY);
+
+            previewContentWidth = safeWidth + PREVIEW_SAFE_PADDING * 2;
+            previewContentHeight = safeHeight + PREVIEW_SAFE_PADDING * 2;
+
+            iframe.style.width = `${safeWidth}px`;
+            iframe.style.height = `${safeHeight}px`;
+            iframe.style.marginLeft = `${offsetX}px`;
+            iframe.style.marginTop = `${offsetY}px`;
+            canvas.style.width = `${previewContentWidth}px`;
+            canvas.style.height = `${previewContentHeight}px`;
+        }
+
+        function setPreviewScale(nextScale, options = {}) {
+            const { resetViewport = false } = options;
+            previewScale = Math.max(PREVIEW_SCALE_MIN, Math.min(PREVIEW_SCALE_MAX, nextScale));
+            applyPreviewScale();
+
+            const scroller = document.getElementById('previewScroller');
+            if (scroller) {
+                if (resetViewport || scroller.scrollLeft < 18) {
+                    scroller.scrollLeft = 0;
+                }
+                if (resetViewport) {
+                    scroller.scrollTop = 0;
+                }
+            }
+        }
+
+        function applyPreviewScale() {
+            const canvas = document.getElementById('previewCanvas');
+            const label = document.getElementById('previewZoomLabel');
+            canvas.style.zoom = `${previewScale}`;
+            label.textContent = `${Math.round(previewScale * 100)}%`;
+        }
+
+        function zoomInPreview() {
+            setPreviewScale(previewScale + 0.1);
+        }
+
+        function zoomOutPreview() {
+            setPreviewScale(previewScale - 0.1);
+        }
+
+        function resetPreviewZoom() {
+            setPreviewScale(1, { resetViewport: true });
+        }
+
+        function fitPreviewWidth(options = {}) {
+            const { resetViewport = true, allowZoomIn = true } = options;
+            const scroller = document.getElementById('previewScroller');
+            if (!scroller || !previewContentWidth) return;
+            const styles = window.getComputedStyle(scroller);
+            const paddingX = (parseFloat(styles.paddingLeft) || 0) + (parseFloat(styles.paddingRight) || 0);
+            let targetScale = (scroller.clientWidth - paddingX - PREVIEW_FIT_GUTTER) / previewContentWidth;
+            if (!allowZoomIn) {
+                targetScale = Math.min(1, targetScale);
+            }
+            setPreviewScale(targetScale, { resetViewport });
+        }
+
+        function getFallbackHistoryContext() {
+            const courseId = document.getElementById('courseSelect').value || 'CUSTOM';
+            const materialType = document.getElementById('materialTypeSelect').value || 'custom';
+            const userRequirements = document.getElementById('userRequirements').value || '';
+            return {
+                course_id: courseId,
+                material_type: materialType,
+                user_requirements: userRequirements,
+                request_params: {
+                    source: 'manual',
+                },
+            };
+        }
+
+        function updateSaveHistoryButton() {
+            const saveBtn = document.getElementById('saveHistoryBtn');
+            if (!saveBtn) return;
+
+            if (!currentHtml) {
+                saveBtn.disabled = true;
+                saveBtn.textContent = '保存到历史';
+                return;
+            }
+
+            if (currentSavedHistoryId) {
+                saveBtn.disabled = true;
+                saveBtn.textContent = '已保存';
+            } else {
+                saveBtn.disabled = false;
+                saveBtn.textContent = '保存到历史';
+            }
+        }
+
+        function markCurrentResultUnsaved() {
+            currentSavedHistoryId = null;
+            updateSaveHistoryButton();
+        }
+
+        async function saveCurrentHistory() {
+            if (!currentHtml) {
+                showToast('当前没有可保存的内容', 'warning');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveHistoryBtn');
+            saveBtn.disabled = true;
+            saveBtn.textContent = '保存中...';
+
+            const baseContext = currentHistoryContext || getFallbackHistoryContext();
+            const payload = {
+                course_id: baseContext.course_id || 'CUSTOM',
+                material_type: baseContext.material_type || 'custom',
+                html: currentHtml,
+                prompt: currentPrompt || '',
+                model_used: currentModel || 'manual',
+                user_requirements: baseContext.user_requirements || '',
+                request_params: {
+                    ...(baseContext.request_params || {}),
+                    saved_at: new Date().toISOString(),
+                },
+            };
+
+            try {
+                const response = await fetch('/api/history', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.detail || '保存失败');
+                }
+
+                const data = await response.json();
+                currentSavedHistoryId = data.history_id || null;
+                updateSaveHistoryButton();
+
+                const historyPanel = document.getElementById('historyPanel');
+                if (historyPanel.classList.contains('active')) {
+                    await loadHistory();
+                }
+
+                showToast('已保存到历史记录', 'success');
+            } catch (error) {
+                console.error('保存历史记录失败:', error);
+                markCurrentResultUnsaved();
+                showToast(`保存失败: ${error.message}`, 'error', 5000);
+            } finally {
+                updateSaveHistoryButton();
+            }
+        }
+
+        function clampPreviewPaneRatio(ratio) {
+            return Math.max(PREVIEW_PANE_RATIO_MIN, Math.min(PREVIEW_PANE_RATIO_MAX, ratio));
+        }
+
+        function restoreEditorLayout() {
+            try {
+                const raw = localStorage.getItem(PREVIEW_PANE_RATIO_STORAGE_KEY);
+                if (!raw) return;
+                const parsed = Number(raw);
+                if (Number.isFinite(parsed)) {
+                    previewPaneRatio = clampPreviewPaneRatio(parsed);
+                }
+            } catch (error) {
+                console.error('恢复编辑器布局失败:', error);
+            }
+        }
+
+        function persistEditorLayout() {
+            try {
+                localStorage.setItem(PREVIEW_PANE_RATIO_STORAGE_KEY, String(previewPaneRatio));
+            } catch (error) {
+                console.error('保存编辑器布局失败:', error);
+            }
+        }
+
+        function applyEditorPaneRatio(ratio, persist = true) {
+            const rightPanel = document.querySelector('.right-panel');
+            if (!rightPanel) return;
+
+            previewPaneRatio = clampPreviewPaneRatio(ratio);
+            rightPanel.style.setProperty('--preview-pane-ratio', previewPaneRatio.toFixed(4));
+
+            if (persist) {
+                persistEditorLayout();
+            }
+        }
+
+        function setupEditorSplitter() {
+            const rightPanel = document.querySelector('.right-panel');
+            const splitter = document.getElementById('editorSplitter');
+            if (!rightPanel || !splitter) return;
+
+            const onPointerMove = (event) => {
+                if (!isEditorPaneResizing) return;
+                const rect = rightPanel.getBoundingClientRect();
+                if (rect.width <= 0) return;
+                const ratio = (event.clientX - rect.left) / rect.width;
+                applyEditorPaneRatio(ratio, false);
+                if (monacoEditor && document.getElementById('codeEditorContainer').classList.contains('active')) {
+                    monacoEditor.layout();
+                }
+            };
+
+            const stopResize = () => {
+                if (!isEditorPaneResizing) return;
+                isEditorPaneResizing = false;
+                document.body.classList.remove('resizing');
+                window.removeEventListener('pointermove', onPointerMove);
+                window.removeEventListener('pointerup', stopResize);
+                window.removeEventListener('pointercancel', stopResize);
+                persistEditorLayout();
+
+                if (monacoEditor && document.getElementById('codeEditorContainer').classList.contains('active')) {
+                    monacoEditor.layout();
+                }
+                if (currentHtml) {
+                    fitPreviewWidth({ resetViewport: false, allowZoomIn: false });
+                }
+            };
+
+            splitter.addEventListener('pointerdown', (event) => {
+                if (!rightPanel.classList.contains('editor-active')) return;
+                event.preventDefault();
+                isEditorPaneResizing = true;
+                document.body.classList.add('resizing');
+                const previewScroller = document.getElementById('previewScroller');
+                if (previewScroller) {
+                    previewScroller.scrollLeft = 0;
+                }
+                window.addEventListener('pointermove', onPointerMove);
+                window.addEventListener('pointerup', stopResize);
+                window.addEventListener('pointercancel', stopResize);
+            });
+
+            splitter.addEventListener('dblclick', () => {
+                if (!rightPanel.classList.contains('editor-active')) return;
+                applyEditorPaneRatio(0.58, true);
+                if (monacoEditor) {
+                    monacoEditor.layout();
+                }
+                if (currentHtml) {
+                    fitPreviewWidth({ resetViewport: false, allowZoomIn: false });
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (!rightPanel.classList.contains('editor-active')) return;
+                applyEditorPaneRatio(previewPaneRatio, false);
+                if (monacoEditor) {
+                    monacoEditor.layout();
+                }
+                if (currentHtml) {
+                    fitPreviewWidth({ resetViewport: false, allowZoomIn: false });
+                }
+            });
+        }
+
+        // 切换历史记录面板
+        function toggleHistory() {
+            const panel = document.getElementById('historyPanel');
+            panel.classList.toggle('active');
+
+            if (panel.classList.contains('active')) {
+                loadHistory();
+            }
+        }
+
+        // 加载历史记录
+        async function loadHistory() {
+            try {
+                const response = await fetch('/api/history');
+                if (!response.ok) throw new Error('加载历史记录失败');
+
+                const historyList = await response.json();
+                displayHistoryList(historyList);
+            } catch (error) {
+                console.error('加载历史记录失败:', error);
+                document.getElementById('historyList').innerHTML =
+                    '<p style="text-align: center; color: #999; padding: 20px;">加载失败</p>';
+            }
+        }
+
+        // HTML 转义，防止 XSS
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // 显示历史记录列表
+        function displayHistoryList(historyList) {
+            const container = document.getElementById('historyList');
+
+            if (historyList.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">暂无历史记录</p>';
+                return;
+            }
+
+            container.innerHTML = historyList.map(item => {
+                const safeId = escapeHtml(item.id);
+                const safeCourseId = escapeHtml(item.course_id);
+                const safeMaterialType = escapeHtml(item.material_type);
+                const safeModel = escapeHtml(item.model_used);
+                const safeReq = escapeHtml(item.user_requirements);
+                const safeTimestamp = escapeHtml(formatTimestamp(item.timestamp));
+                return `
+                <div class="history-item" data-history-id="${safeId}">
+                    <div class="history-item-title">${safeCourseId} - ${safeMaterialType}</div>
+                    <div class="history-item-meta">时间: ${safeTimestamp}</div>
+                    <div class="history-item-meta">模型: ${safeModel}</div>
+                    ${safeReq ? `<div class="history-item-desc">${safeReq}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // 使用事件委托代替 inline onclick，避免 ID 注入
+            container.querySelectorAll('.history-item').forEach(el => {
+                const hid = el.dataset.historyId;
+                el.addEventListener('click', () => loadHistoryItem(hid));
+                el.addEventListener('contextmenu', (e) => { e.preventDefault(); e.stopPropagation(); deleteHistoryItem(hid); });
+            });
+        }
+
+        async function deleteHistoryItem(historyId) {
+            const shouldDelete = confirm(`确认删除该历史记录？\n${historyId}`);
+            if (!shouldDelete) return;
+
+            try {
+                const response = await fetch(`/api/history/${historyId}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.detail || '删除失败');
+                }
+
+                await loadHistory();
+                if (currentSavedHistoryId === historyId) {
+                    currentSavedHistoryId = null;
+                    updateSaveHistoryButton();
+                }
+            } catch (error) {
+                console.error('删除历史记录失败:', error);
+                showToast(`删除失败: ${error.message}`, 'error', 5000);
+            }
+        }
+
+        // 格式化时间戳
+        function formatTimestamp(timestamp) {
+            const year = timestamp.substring(0, 4);
+            const month = timestamp.substring(4, 6);
+            const day = timestamp.substring(6, 8);
+            const hour = timestamp.substring(9, 11);
+            const minute = timestamp.substring(11, 13);
+            const second = timestamp.substring(13, 15);
+            return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+        }
+
+        // 加载历史记录详情
+        async function loadHistoryItem(historyId) {
+            try {
+                const response = await fetch(`/api/history/${historyId}`);
+                if (!response.ok) throw new Error('加载历史记录详情失败');
+
+                const historyDetail = await response.json();
+
+                // 恢复生成结果
+                currentHtml = historyDetail.html;
+                currentPrompt = historyDetail.prompt;
+                currentModel = historyDetail.model_used;
+                currentHistoryContext = {
+                    course_id: historyDetail.course_id || 'CUSTOM',
+                    material_type: historyDetail.material_type || 'custom',
+                    user_requirements: historyDetail.user_requirements || '',
+                    request_params: historyDetail.request_params || {},
+                };
+                currentSavedHistoryId = historyDetail.id || null;
+
+                // 更新预览
+                renderPreview(currentHtml);
+
+                // 同步到代码编辑器
+                if (monacoEditor && document.getElementById('codeEditorContainer').classList.contains('active')) {
+                    isEditorSyncing = true;
+                    monacoEditor.setValue(currentHtml);
+                    isEditorSyncing = false;
+                }
+
+                // 显示微调对话框
+                document.getElementById('editDialog').style.display = 'block';
+
+                // 更新提示词
+                document.getElementById('promptTextarea').value = currentPrompt;
+                document.getElementById('modelName').textContent = currentModel;
+
+                // 启用按钮
+                document.getElementById('regenerateBtn').disabled = false;
+                updateSaveHistoryButton();
+                document.getElementById('exportHtmlBtn').disabled = false;
+                document.getElementById('exportPdfBtn').disabled = false;
+                document.getElementById('exportPngBtn').disabled = false;
+
+                // 关闭历史面板
+                toggleHistory();
+
+                showToast('历史记录已加载', 'success');
+            } catch (error) {
+                console.error('加载历史记录详情失败:', error);
+                showToast('加载历史记录失败: ' + error.message, 'error', 5000);
+            }
+        }
+
+        // 初始化Monaco Editor
+        function initMonacoEditor() {
+            require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } });
+            require(['vs/editor/editor.main'], function () {
+                monacoEditor = monaco.editor.create(document.getElementById('monacoEditor'), {
+                    value: '',
+                    language: 'html',
+                    theme: 'vs-dark',
+                    automaticLayout: true,
+                    minimap: { enabled: false },
+                    fontSize: 12,
+                    lineNumbers: 'on',
+                    scrollBeyondLastLine: false,
+                    wordWrap: 'on',
+                    maxTokenizationLineLength: 20000,
+                    renderValidationDecorations: 'off'
+                });
+
+                // 监听编辑器内容变化
+                monacoEditor.onDidChangeModelContent(() => {
+                    if (!isEditorSyncing) {
+                        // 用户手动编辑了代码，标记为已修改
+                        document.getElementById('codeEditorContainer').dataset.modified = 'true';
+                    }
+                });
+            });
+        }
+
+        // 切换代码编辑器显示/隐藏
+        function toggleCodeEditor() {
+            const rightPanel = document.querySelector('.right-panel');
+            const container = document.getElementById('codeEditorContainer');
+            const toggleText = document.getElementById('editorToggleText');
+
+            if (container.classList.contains('active')) {
+                container.classList.remove('active');
+                rightPanel.classList.remove('editor-active');
+                toggleText.textContent = '显示代码编辑器';
+            } else {
+                container.classList.add('active');
+                rightPanel.classList.add('editor-active');
+                applyEditorPaneRatio(previewPaneRatio, false);
+                toggleText.textContent = '隐藏代码编辑器';
+
+                // 如果有当前HTML，同步到编辑器
+                if (currentHtml && monacoEditor) {
+                    isEditorSyncing = true;
+                    monacoEditor.setValue(currentHtml);
+                    isEditorSyncing = false;
+                    delete document.getElementById('codeEditorContainer').dataset.modified;
+                }
+
+                requestAnimationFrame(() => {
+                    if (monacoEditor) {
+                        monacoEditor.layout();
+                    }
+                    const previewScroller = document.getElementById('previewScroller');
+                    if (previewScroller) {
+                        previewScroller.scrollLeft = 0;
+                    }
+                    if (currentHtml) {
+                        fitPreviewWidth({ resetViewport: false, allowZoomIn: false });
+                    }
+                });
+            }
+        }
+
+        // 应用代码更改
+        function applyCodeChanges() {
+            if (!monacoEditor) return;
+
+            const newHtml = monacoEditor.getValue();
+            currentHtml = newHtml;
+
+            // 更新预览
+            renderPreview(newHtml);
+            if (!currentHistoryContext) {
+                currentHistoryContext = getFallbackHistoryContext();
+            }
+            currentHistoryContext = {
+                ...currentHistoryContext,
+                request_params: {
+                    ...(currentHistoryContext.request_params || {}),
+                    source: 'code-editor',
+                    modified_in_editor: true,
+                },
+            };
+            markCurrentResultUnsaved();
+
+            delete document.getElementById('codeEditorContainer').dataset.modified;
+            showToast('代码已应用到预览区', 'success');
+        }
+
+        // 重置代码
+        function resetCode() {
+            if (!monacoEditor || !currentHtml) return;
+
+            if (confirm('确定要重置代码吗？这将丢失所有未保存的修改。')) {
+                isEditorSyncing = true;
+                monacoEditor.setValue(currentHtml);
+                isEditorSyncing = false;
+                delete document.getElementById('codeEditorContainer').dataset.modified;
+            }
+        }
+
+        // 对话式微调
+        async function applyEdit() {
+            const editInstruction = document.getElementById('editInstruction').value.trim();
+            const editPresets = Array.from(document.querySelectorAll('input[name="editPreset"]:checked'))
+                .map(cb => cb.value);
+            const presetInstruction = editPresets.length > 0
+                ? `并请额外执行以下通用精修项：\n${editPresets.map(item => `- ${item}`).join('\n')}`
+                : '';
+            const finalEditInstruction = [editInstruction, presetInstruction]
+                .filter(Boolean)
+                .join('\n\n')
+                .trim();
+
+            if (!finalEditInstruction) {
+                showToast('请输入修改指令或勾选精修项', 'warning');
+                return;
+            }
+
+            if (!currentHtml) {
+                showToast('请先生成素材', 'warning');
+                return;
+            }
+
+            const courseId = document.getElementById('courseSelect').value;
+            const materialType = document.getElementById('materialTypeSelect').value;
+
+            if (!courseId || !materialType) {
+                showToast('请选择课程和素材类型', 'warning');
+                return;
+            }
+
+            const applyEditBtn = document.getElementById('applyEditBtn');
+            const useClaude = document.getElementById('useClaudeCheckbox').checked;
+            const useGPT = document.getElementById('useGPTCheckbox').checked;
+
+            applyEditBtn.disabled = true;
+            applyEditBtn.textContent = useClaude ? '正在使用 Claude 修改...' : (useGPT ? '正在使用 GPT 修改...' : '正在修改...');
+            showLoading(true);
+
+            try {
+                const editPayload = {
+                    current_html: currentHtml,
+                    edit_instruction: finalEditInstruction,
+                    course_id: courseId,
+                    material_type: materialType,
+                    use_claude: useClaude,
+                    use_gpt: useGPT
+                };
+                const response = await fetch('/api/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(editPayload)
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || '微调失败');
+                }
+
+                const data = await response.json();
+                displayResult(data, {
+                    course_id: courseId,
+                    material_type: materialType,
+                    user_requirements: finalEditInstruction,
+                    request_params: {
+                        ...editPayload,
+                        source: 'edit',
+                    }
+                });
+
+                // 清空输入框
+                document.getElementById('editInstruction').value = '';
+
+                showToast('修改已应用', 'success');
+            } catch (error) {
+                console.error('微调失败:', error);
+                showToast('微调失败: ' + error.message, 'error', 5000);
+            } finally {
+                applyEditBtn.disabled = false;
+                applyEditBtn.textContent = '应用修改';
+                showLoading(false);
+            }
+        }
+
+        // 保存表单状态到 localStorage
+        function saveFormState() {
+            const state = {
+                courseId: document.getElementById('courseSelect').value,
+                materialType: document.getElementById('materialTypeSelect').value,
+                userRequirements: document.getElementById('userRequirements').value,
+                visualStyles: Array.from(document.querySelectorAll('input[name="visualStyle"]:checked')).map(cb => cb.value),
+                narrativeStyles: Array.from(document.querySelectorAll('input[name="narrativeStyle"]:checked')).map(cb => cb.value),
+                layoutStructures: Array.from(document.querySelectorAll('input[name="layoutStructure"]:checked')).map(cb => cb.value),
+                visualElements: Array.from(document.querySelectorAll('input[name="visualElements"]:checked')).map(cb => cb.value),
+                contentPresentations: Array.from(document.querySelectorAll('input[name="contentPresentation"]:checked')).map(cb => cb.value),
+                editPresets: Array.from(document.querySelectorAll('input[name="editPreset"]:checked')).map(cb => cb.value),
+                contentModules: Array.from(document.querySelectorAll('input[name="contentModule"]')).map(cb => ({
+                    value: cb.value,
+                    checked: cb.checked
+                })),
+                logoUrl: document.getElementById('logoSelect').value
+            };
+            localStorage.setItem('ee-material-gen-state', JSON.stringify(state));
+        }
+
+        // 从 localStorage 恢复表单状态
+        function restoreFormState() {
+            const savedState = localStorage.getItem('ee-material-gen-state');
+            if (!savedState) return;
+
+            try {
+                const state = JSON.parse(savedState);
+
+                // 恢复下拉选择
+                if (state.courseId) {
+                    document.getElementById('courseSelect').value = state.courseId;
+                }
+                if (state.materialType) {
+                    document.getElementById('materialTypeSelect').value = state.materialType;
+                }
+                if (state.userRequirements) {
+                    document.getElementById('userRequirements').value = state.userRequirements;
+                }
+
+                // 恢复复选框状态
+                if (state.visualStyles) {
+                    state.visualStyles.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="visualStyle"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (state.narrativeStyles) {
+                    state.narrativeStyles.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="narrativeStyle"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (state.layoutStructures) {
+                    state.layoutStructures.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="layoutStructure"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (state.visualElements) {
+                    state.visualElements.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="visualElements"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (state.contentPresentations) {
+                    state.contentPresentations.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="contentPresentation"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (Array.isArray(state.editPresets)) {
+                    document.querySelectorAll('input[name="editPreset"]').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                    state.editPresets.forEach(value => {
+                        const checkbox = document.querySelector(`input[name="editPreset"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+                if (state.contentModules) {
+                    state.contentModules.forEach(module => {
+                        const checkbox = document.querySelector(`input[name="contentModule"][value="${module.value}"]`);
+                        if (checkbox) checkbox.checked = module.checked;
+                    });
+                }
+
+                // 恢复视觉资产选择
+                if (state.logoUrl) {
+                    document.getElementById('logoSelect').value = state.logoUrl;
+                }
+            } catch (error) {
+                console.error('恢复表单状态失败:', error);
+            }
+        }
+
+        // 设置自动保存
+        function setupAutoSave() {
+            // 监听所有表单元素的变化
+            document.getElementById('courseSelect').addEventListener('change', saveFormState);
+            document.getElementById('materialTypeSelect').addEventListener('change', saveFormState);
+            document.getElementById('userRequirements').addEventListener('input', saveFormState);
+            document.getElementById('logoSelect').addEventListener('change', saveFormState);
+
+            // 监听所有复选框的变化
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', saveFormState);
+            });
+        }
+
+        // 加载课程列表
+        async function loadCourses() {
+            try {
+                const response = await fetch('/api/courses');
+                const courses = await response.json();
+                const select = document.getElementById('courseSelect');
+
+                courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.course_id;
+                    option.textContent = `${course.name} (${course.short_name})`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('加载课程列表失败:', error);
+                showToast('加载课程列表失败，请刷新页面重试', 'error', 5000);
+            }
+        }
+
+        // 加载素材类型列表
+        // 素材类型 export_width 缓存
+        const materialTypeWidths = {};
+
+        async function loadMaterialTypes() {
+            try {
+                const response = await fetch('/api/material-types');
+                const types = await response.json();
+                const select = document.getElementById('materialTypeSelect');
+
+                types.forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type.type_id;
+                    option.textContent = `${type.name} - ${type.description}`;
+                    select.appendChild(option);
+                    if (type.export_width) materialTypeWidths[type.type_id] = type.export_width;
+                });
+            } catch (error) {
+                console.error('加载素材类型失败:', error);
+                showToast('加载素材类型失败，请刷新页面重试', 'error', 5000);
+            }
+        }
+
+        // 加载视觉资产列表
+        async function loadVisualAssets() {
+            try {
+                const response = await fetch('/api/visual-assets');
+                const assets = await response.json();
+
+                // 加载 Logo 列表
+                const logoSelect = document.getElementById('logoSelect');
+                assets.logos.forEach(logo => {
+                    const option = document.createElement('option');
+                    option.value = logo.url;
+                    option.textContent = logo.name;
+                    logoSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('加载视觉资产失败:', error);
+                // 不阻塞用户，只是记录错误
+            }
+        }
+
+        // 设置事件监听
+        function setupEventListeners() {
+            document.getElementById('generateBtn').addEventListener('click', generateMaterial);
+            document.getElementById('regenerateBtn').addEventListener('click', regenerateMaterial);
+            // 导出按钮绑定已改为 onclick，此处无需绑定
+        }
+
+        // 生成素材
+        async function generateMaterial() {
+            const courseId = document.getElementById('courseSelect').value;
+            const materialType = document.getElementById('materialTypeSelect').value;
+            const userRequirements = document.getElementById('userRequirements').value;
+
+            // Phase 2: 获取生成前细分控制选项（多选）
+            const visualStyles = Array.from(document.querySelectorAll('input[name="visualStyle"]:checked'))
+                .map(cb => cb.value);
+            const narrativeStyles = Array.from(document.querySelectorAll('input[name="narrativeStyle"]:checked'))
+                .map(cb => cb.value);
+            const layoutStructures = Array.from(document.querySelectorAll('input[name="layoutStructure"]:checked'))
+                .map(cb => cb.value);
+            const visualElementsList = Array.from(document.querySelectorAll('input[name="visualElements"]:checked'))
+                .map(cb => cb.value);
+            const contentPresentations = Array.from(document.querySelectorAll('input[name="contentPresentation"]:checked'))
+                .map(cb => cb.value);
+
+            // Phase 2: 获取内容模块开关
+            const contentModules = {};
+            document.querySelectorAll('input[name="contentModule"]').forEach(cb => {
+                contentModules[cb.value] = cb.checked;
+            });
+
+            // Phase 2: 获取视觉资产选择
+            const logoUrl = document.getElementById('logoSelect').value || null;
+
+            if (!courseId || !materialType) {
+                showToast('请选择课程和素材类型', 'warning');
+                return;
+            }
+
+            showLoading(true, '正在生成素材，请稍候...');
+
+            const generatePayload = {
+                course_id: courseId,
+                material_type: materialType,
+                user_requirements: userRequirements,
+                custom_prompt: null,
+                visual_style: visualStyles.length > 0 ? visualStyles.join(' + ') : null,
+                narrative_style: narrativeStyles.length > 0 ? narrativeStyles.join(' + ') : null,
+                layout_structure: layoutStructures.length > 0 ? layoutStructures.join(' + ') : null,
+                visual_elements: visualElementsList.length > 0 ? visualElementsList.join(' + ') : null,
+                content_presentation: contentPresentations.length > 0 ? contentPresentations.join(' + ') : null,
+                include_faculty: contentModules.faculty !== false,
+                include_schedule: contentModules.schedule !== false,
+                include_tuition: contentModules.tuition !== false,
+                include_student_profile: contentModules.studentProfile !== false,
+                include_curriculum: contentModules.curriculum !== false,
+                include_certification: contentModules.certification !== false,
+                logo_url: logoUrl,
+                background_url: null
+            };
+
+            try {
+                const response = await fetch('/api/generate/stream', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(generatePayload)
+                });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.detail || '生成失败');
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                const historyCtx = {
+                    course_id: courseId,
+                    material_type: materialType,
+                    user_requirements: userRequirements,
+                    request_params: { ...generatePayload, source: 'generate' }
+                };
+
+                stream: while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        // flush decoder + 处理 buffer 中残留的 done 事件
+                        buffer += decoder.decode();
+                        const remaining = buffer.trim();
+                        if (remaining.startsWith('data: ')) {
+                            try {
+                                const ev = JSON.parse(remaining.slice(6));
+                                if (ev.type === 'done') displayResult(ev, historyCtx);
+                                else if (ev.type === 'error') throw new Error(ev.message || '生成失败');
+                            } catch { /* ignore incomplete/malformed */ }
+                        }
+                        break;
+                    }
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const parts = buffer.split('\n\n');
+                    buffer = parts.pop();
+
+                    for (const part of parts) {
+                        if (!part.startsWith('data: ')) continue;
+                        let event;
+                        try { event = JSON.parse(part.slice(6)); } catch { continue; }
+
+                        if (event.type === 'chunk') {
+                            showLoading(true, `正在生成... ${event.total_len.toLocaleString()} 字符`);
+                        } else if (event.type === 'done') {
+                            displayResult(event, historyCtx);
+                            break stream;  // 同时退出 for 和 while
+                        } else if (event.type === 'error') {
+                            throw new Error(event.message || '生成失败');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('生成失败:', error);
+                showToast('生成失败，请重试', 'error', 5000);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // 重新生成（使用自定义提示词）
+        async function regenerateMaterial() {
+            const customPrompt = document.getElementById('promptTextarea').value;
+
+            if (!customPrompt) {
+                showToast('请输入提示词', 'warning');
+                return;
+            }
+
+            showLoading(true, '正在重新生成，请稍候...');
+
+            const selectedCourseId = document.getElementById('courseSelect').value || 'EE-QYJ';
+            const selectedMaterialType = document.getElementById('materialTypeSelect').value || 'recruit-poster';
+            const regeneratePayload = {
+                course_id: selectedCourseId,
+                material_type: selectedMaterialType,
+                user_requirements: '',
+                custom_prompt: customPrompt
+            };
+
+            try {
+                const response = await fetch('/api/generate/stream', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(regeneratePayload)
+                });
+
+                if (!response.ok) {
+                    throw new Error('生成失败');
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                const historyCtx = {
+                    course_id: selectedCourseId,
+                    material_type: selectedMaterialType,
+                    user_requirements: customPrompt,
+                    request_params: { ...regeneratePayload, source: 'regenerate' }
+                };
+
+                stream: while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        buffer += decoder.decode();
+                        const remaining = buffer.trim();
+                        if (remaining.startsWith('data: ')) {
+                            try {
+                                const ev = JSON.parse(remaining.slice(6));
+                                if (ev.type === 'done') displayResult(ev, historyCtx);
+                                else if (ev.type === 'error') throw new Error(ev.message || '生成失败');
+                            } catch { /* ignore */ }
+                        }
+                        break;
+                    }
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const parts = buffer.split('\n\n');
+                    buffer = parts.pop();
+
+                    for (const part of parts) {
+                        if (!part.startsWith('data: ')) continue;
+                        let event;
+                        try { event = JSON.parse(part.slice(6)); } catch { continue; }
+
+                        if (event.type === 'chunk') {
+                            showLoading(true, `正在生成... ${event.total_len.toLocaleString()} 字符`);
+                        } else if (event.type === 'done') {
+                            displayResult(event, historyCtx);
+                            break stream;
+                        } else if (event.type === 'error') {
+                            throw new Error(event.message || '生成失败');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('生成失败:', error);
+                showToast('生成失败，请重试', 'error', 5000);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // 显示结果
+        function displayResult(data, historyContext = null) {
+            currentHtml = data.html;
+            currentPrompt = data.prompt_used;
+            currentModel = data.model_used;
+            currentHistoryContext = historyContext || getFallbackHistoryContext();
+            markCurrentResultUnsaved();
+
+            // 更新预览
+            renderPreview(currentHtml);
+
+            // 同步到代码编辑器
+            if (monacoEditor && document.getElementById('codeEditorContainer').classList.contains('active')) {
+                isEditorSyncing = true;
+                monacoEditor.setValue(currentHtml);
+                isEditorSyncing = false;
+                delete document.getElementById('codeEditorContainer').dataset.modified;
+            }
+
+            // 显示微调对话框
+            document.getElementById('editDialog').style.display = 'block';
+
+            // 更新提示词
+            document.getElementById('promptTextarea').value = currentPrompt;
+            document.getElementById('modelName').textContent = currentModel;
+
+            // 启用按钮
+            document.getElementById('regenerateBtn').disabled = false;
+            document.getElementById('exportHtmlBtn').disabled = false;
+            document.getElementById('exportPdfBtn').disabled = false;
+            document.getElementById('exportPngBtn').disabled = false;
+        }
+
+        // 导出相关
+        let _exportFormat = null;
+
+        function openExportModal(format) {
+            if (!currentHtml) { showToast('请先生成素材', 'warning'); return; }
+            _exportFormat = format;
+            const courseId = document.getElementById('courseSelect').value;
+            const materialType = document.getElementById('materialTypeSelect').value;
+            const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            document.getElementById('exportFilename').value = `${courseId}_${materialType}_${timestamp}`;
+            document.getElementById('exportStatus').style.display = 'none';
+            document.getElementById('exportConfirmBtn').disabled = false;
+            document.getElementById('exportCancelBtn').disabled = false;
+            const modal = document.getElementById('exportModal');
+            modal.style.display = 'flex';
+            setTimeout(() => document.getElementById('exportFilename').select(), 50);
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').style.display = 'none';
+            _exportFormat = null;
+        }
+
+        async function confirmExport() {
+            const filename = document.getElementById('exportFilename').value.trim();
+            if (!filename) { showToast('请输入文件名', 'warning'); return; }
+
+            const confirmBtn = document.getElementById('exportConfirmBtn');
+            const cancelBtn = document.getElementById('exportCancelBtn');
+            const statusEl = document.getElementById('exportStatus');
+            const statusText = document.getElementById('exportStatusText');
+
+            confirmBtn.disabled = true;
+            cancelBtn.disabled = true;
+            statusEl.style.display = 'flex';
+            if (_exportFormat === 'pdf') {
+                statusText.textContent = '正在渲染 PDF...';
+            } else if (_exportFormat === 'png') {
+                statusText.textContent = '正在截图生成图片...';
+            } else {
+                statusText.textContent = '正在准备 HTML 文件...';
+            }
+
+            const materialType = document.getElementById('materialTypeSelect').value;
+            const exportWidth = materialTypeWidths[materialType] || 750;
+
+            try {
+                const response = await fetch('/api/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        html: currentHtml,
+                        format: _exportFormat,
+                        filename: filename,
+                        export_width: exportWidth
+                    })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.detail || '导出失败');
+                }
+
+                statusText.textContent = '下载中...';
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${filename}.${_exportFormat}`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+
+                closeExportModal();
+            } catch (error) {
+                console.error('导出失败:', error);
+                statusText.textContent = `导出失败：${error.message}`;
+                confirmBtn.disabled = false;
+                cancelBtn.disabled = false;
+            }
+        }
+
+        // 显示/隐藏加载状态
+        function showLoading(show, msg) {
+            const loading = document.getElementById('loading');
+            const previewScroller = document.getElementById('previewScroller');
+            const emptyState = document.getElementById('emptyState');
+            const loadingMsg = document.getElementById('loadingMsg');
+
+            if (show) {
+                loading.classList.add('active');
+                previewScroller.style.display = 'none';
+                emptyState.style.display = 'none';
+                if (loadingMsg) loadingMsg.textContent = msg || '正在生成素材，请稍候...';
+            } else {
+                loading.classList.remove('active');
+                if (loadingMsg) loadingMsg.textContent = '正在生成素材，请稍候...';
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+    <!-- 导出对话框 -->
+    <div id="exportModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#1e2a3a; border:1px solid #2d4a6b; border-radius:12px; padding:28px; width:380px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+            <h3 style="margin:0 0 20px; color:#e8f4fd; font-size:16px;">导出素材</h3>
+            <div style="margin-bottom:16px;">
+                <label style="display:block; color:#8ab4d4; font-size:13px; margin-bottom:6px;">文件名</label>
+                <input id="exportFilename" type="text" style="width:100%; box-sizing:border-box; background:#0d1b2a; border:1px solid #2d4a6b; border-radius:6px; padding:8px 12px; color:#e8f4fd; font-size:14px; outline:none;">
+            </div>
+            <div id="exportStatus" style="display:none; margin-bottom:16px; padding:10px 14px; background:#0d1b2a; border-radius:6px; color:#8ab4d4; font-size:13px; align-items:center; gap:10px;">
+                <span id="exportSpinner" style="display:inline-block; width:14px; height:14px; border:2px solid #2d4a6b; border-top-color:#00a3d9; border-radius:50%; animation:spin 0.8s linear infinite; flex-shrink:0;"></span>
+                <span id="exportStatusText">正在渲染...</span>
+            </div>
+            <div style="display:flex; gap:10px; justify-content:flex-end;">
+                <button id="exportCancelBtn" onclick="closeExportModal()" style="padding:8px 18px; background:transparent; border:1px solid #2d4a6b; border-radius:6px; color:#8ab4d4; cursor:pointer; font-size:14px;">取消</button>
+                <button id="exportConfirmBtn" onclick="confirmExport()" style="padding:8px 18px; background:#00a3d9; border:none; border-radius:6px; color:#fff; cursor:pointer; font-size:14px; font-weight:500;">导出</button>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</body>
+</html>
