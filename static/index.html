@@ -703,6 +703,22 @@
             100% { transform: rotate(360deg); }
         }
 
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            margin: 20px auto 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00349A, #0066CC);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
         .empty-state {
             display: flex;
             flex-direction: column;
@@ -1142,6 +1158,9 @@
                         <div class="loading" id="loading">
                             <div class="spinner"></div>
                             <p id="loadingMsg">正在生成素材，请稍候...</p>
+                            <div class="progress-bar" id="progressBar" style="display: none;">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
                         </div>
 
                         <div class="empty-state" id="emptyState">
@@ -1345,6 +1364,21 @@
         }
 
         // 安全渲染预览（避免直接访问 iframe 文档对象）
+        // 进度条
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            progressBar.style.display = 'block';
+            progressFill.style.width = percent + '%';
+        }
+
+        function resetProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            progressBar.style.display = 'none';
+            progressFill.style.width = '0%';
+        }
+
         // 撤销/重做功能
         function saveToUndoStack(html) {
             if (undoStack.length === 0 || undoStack[undoStack.length - 1] !== html) {
