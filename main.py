@@ -594,6 +594,103 @@ async def delete_history_by_id(history_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ==================== 批量生成 ====================
+
+@app.post("/api/batch-generate")
+async def batch_generate(request: BatchGenerateRequest):
+    """批量生成素材"""
+    try:
+        results = []
+        for course_id in request.course_ids:
+            try:
+                prompt = prompt_builder.build_prompt(
+                    course_id=course_id,
+                    material_type=request.material_type,
+                    user_requirements=request.user_requirements
+                )
+                max_output_tokens = MATERIAL_MAX_OUTPUT_TOKENS.get(
+                    request.material_type, GENERATE_MAX_OUTPUT_TOKENS_DEFAULT
+                )
+                response_text, model_used = gemini_client.generate(prompt, max_output_tokens=max_output_tokens)
+                html = extract_html_from_response(response_text)
+
+                results.append({
+                    "course_id": course_id,
+                    "success": True,
+                    "html": html,
+                    "model_used": model_used
+                })
+            except Exception as e:
+                results.append({
+                    "course_id": course_id,
+                    "success": False,
+                    "error": str(e)
+                })
+
+        return JSONResponse(content={"results": results})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ==================== 模板管理 ====================
+
+TEMPLATES_DIR = BASE_DIR / "templates"
+TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+
+
+@app.get("/api/templates")
+async def get_templates():
+    """获取所有模板"""
+    try:
+        templates = []
+        for file in TEMPLATES_DIR.glob("*.json"):
+            with open(file, 'r', encoding='utf-8') as f:
+                templates.append(json.load(f))
+        return JSONResponse(content=templates)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/templates")
+async def save_template(request: TemplateRequest):
+    """保存模板"""
+    try:
+        template_id = f"template_{int(time.time())}"
+        template_data = {
+            "id": template_id,
+            "name": request.name,
+            "description": request.description,
+            "visual_style": request.visual_style,
+            "narrative_style": request.narrative_style,
+            "layout_structure": request.layout_structure,
+            "visual_elements": request.visual_elements,
+            "content_presentation": request.content_presentation
+        }
+
+        template_file = TEMPLATES_DIR / f"{template_id}.json"
+        with open(template_file, 'w', encoding='utf-8') as f:
+            json.dump(template_data, f, ensure_ascii=False, indent=2)
+
+        return JSONResponse(content={"success": True, "template_id": template_id})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/templates/{template_id}")
+async def delete_template(template_id: str):
+    """删除模板"""
+    try:
+        template_file = TEMPLATES_DIR / f"{template_id}.json"
+        if template_file.exists():
+            template_file.unlink()
+            return JSONResponse(content={"success": True})
+        raise HTTPException(status_code=404, detail="模板不存在")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ==================== Playwright 浏览器池 ====================
 
 _playwright_instance = None
