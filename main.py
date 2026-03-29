@@ -152,6 +152,24 @@ class SaveHistoryRequest(BaseModel):
     request_params: Optional[dict[str, Any]] = None
 
 
+class TemplateRequest(BaseModel):
+    """模板请求"""
+    name: str
+    description: Optional[str] = ""
+    visual_style: Optional[str] = None
+    narrative_style: Optional[str] = None
+    layout_structure: Optional[str] = None
+    visual_elements: Optional[str] = None
+    content_presentation: Optional[str] = None
+
+
+class BatchGenerateRequest(BaseModel):
+    """批量生成请求"""
+    course_ids: list[str]
+    material_type: str
+    user_requirements: str = ""
+
+
 # ==================== API 接口 ====================
 
 # 全局异常处理器
@@ -509,6 +527,22 @@ async def get_history():
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/api/history/search")
+async def search_history(
+    course_id: Optional[str] = None,
+    material_type: Optional[str] = None,
+    keyword: Optional[str] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None
+):
+    """搜索历史记录"""
+    try:
+        history_list = search_history_records(course_id, material_type, keyword, start_date, end_date)
+        return JSONResponse(content=history_list)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/api/history")
 async def save_history_manually(request: SaveHistoryRequest):
     """手动保存历史记录"""
@@ -754,6 +788,44 @@ def get_history_list():
             continue
 
     return history_list
+
+
+def search_history_records(course_id=None, material_type=None, keyword=None, start_date=None, end_date=None):
+    """搜索历史记录"""
+    history_files = sorted(HISTORY_DIR.glob("*.json"), reverse=True)
+    results = []
+
+    for file in history_files:
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+                # 过滤条件
+                if course_id and data.get("course_id") != course_id:
+                    continue
+                if material_type and data.get("material_type") != material_type:
+                    continue
+                if keyword:
+                    searchable = f"{data.get('user_requirements', '')} {data.get('html', '')}"
+                    if keyword.lower() not in searchable.lower():
+                        continue
+                if start_date and data.get("timestamp", "") < start_date:
+                    continue
+                if end_date and data.get("timestamp", "") > end_date:
+                    continue
+
+                results.append({
+                    "id": data.get("id"),
+                    "timestamp": data.get("timestamp"),
+                    "course_id": data.get("course_id"),
+                    "material_type": data.get("material_type"),
+                    "model_used": data.get("model_used"),
+                    "user_requirements": data.get("user_requirements", "")[:100]
+                })
+        except Exception:
+            continue
+
+    return results
 
 
 def get_history_detail(history_id: str):
